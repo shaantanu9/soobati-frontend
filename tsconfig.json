@@ -1,0 +1,65 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  // "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "esnext",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/utils/interface.ts"
+    ],
+    "types": ["node","react-native", "jest"],
+    "module": "commonjs",
+    "jsx": "react-native",
+
+    "lib": [
+      "DOM",
+      "es2019",
+      "es2020.bigint",
+      "es2020.date",
+      "es2020.number",
+      "es2020.promise",
+      "es2020.string",
+      "es2020.symbol.wellknown",
+      "es2021.promise",
+      "es2021.string",
+      "es2021.weakref",
+      "es2022.array",
+      "es2022.object",
+      "es2022.string",
+      "ES2021.Intl",
+      "ES2023.Array"
+  ],
+
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "incremental": true,
+
+    // "jsxImportSource": "nativewind",
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": ["./utils/*"],
+      "@components/*": ["./components/*"],
+      "@screens/*": ["./screens/*"],
+      "@assets/*": ["./assets/*"],
+      "@navigations/*": ["./navigations/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@context/*": ["./context/*"],
+      "@services/*": ["./services/*"],
+      "@constants/*": ["./constants/*"],
+      "@styles/*": ["./styles/*"],
+      "@types/*": ["./types/*"],
+
+      // Add other path aliases as needed
+    },
+    // Other compiler options...
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "dist"]
+}
