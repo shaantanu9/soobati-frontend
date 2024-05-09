@@ -83,11 +83,15 @@ const HomeDashbaord = () => {
     ref.current?.snapToIndex(index);
   };
 
+  const [payload, setPayload] = useState({
+    ownerId: user.userId,
+  });
+
   useEffect(() => {
-    dispatch(fetchBusinesses());
+    dispatch(fetchBusinesses(payload));
   }, []);
   useEffect(() => {
-    if (selectedCategory === 'product') {
+    if (selectedCategory === 'product' && selectedBusiness?._id) {
       console.log('Product');
       dispatch(
         fetchProducts({
@@ -95,12 +99,12 @@ const HomeDashbaord = () => {
         }),
       );
     }
-    if (selectedCategory === 'employee') {
+    if (selectedCategory === 'employee' && selectedBusiness?._id) {
       // fetch employees
       console.log('Employee');
       setSelectedEmployee(selectedBusiness?.employees);
     }
-    if (selectedCategory === 'customer') {
+    if (selectedCategory === 'customer' && selectedBusiness?._id) {
       // fetch customers
       console.log('Customer');
       _subscriptionService
@@ -114,7 +118,7 @@ const HomeDashbaord = () => {
           }
         });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, selectedBusiness]);
 
   const addEmployeeHandler = async () => {
     if (!employeeMobile || employeeMobile.length < 10) {

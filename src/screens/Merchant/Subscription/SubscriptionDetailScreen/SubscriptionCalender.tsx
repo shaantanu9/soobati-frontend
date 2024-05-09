@@ -1,5 +1,6 @@
 import {Modal} from '@ui-kitten/components';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import React, {useEffect, useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {Calendar} from 'react-native-calendars';
@@ -13,10 +14,10 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import MyText from '../../../../components/new/MyText';
-import {useAppDispatch, useAppSelector} from '../../../../hooks/useAppSelector';
+import {useAppDispatch} from '../../../../hooks/useAppSelector';
 import {_subscriptionService} from '../../../../services/api/subscription';
 import styles from '../../../../styles';
-
+dayjs.extend(utc);
 const SubscriptionCalendar = ({item}: any) => {
   const [deliveryDetails, setDeliveryDetails] = useState({
     status: '',
@@ -32,6 +33,7 @@ const SubscriptionCalendar = ({item}: any) => {
 
   const [markedDates, setMarkedDates] = useState<any>({});
   const [totalDeilivered, setTotalDeilivered] = useState(0);
+  const [totalReturn, setTotalReturn] = useState(0);
   const [prevSelectedDate, setPrevSelectedDate] = useState(
     dayjs().format('YYYY-MM-DD'),
   );
@@ -39,25 +41,36 @@ const SubscriptionCalendar = ({item}: any) => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [startUseEffect, setStartUseEffect] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openChangeDateModal, setOpenChangeDateModal] = useState(false);
+  const [deliveryForMarker, setDeliveryForMarker] = useState<any>([
+    ...item?.deliveries,
+  ]);
   const dispatch = useAppDispatch();
 
-  // update deleivery status
-  const sub = useAppSelector(state => state.subscription.subscriptions);
-
-  const handleDeliveryStatus = () => {
+  const handleDeliveryStatus = (
+    // changePreviousDays:boolean = false
+    changePreviousDays?: boolean,
+  ) => {
     setLoading(true);
-    const arg = {
-      subscriptionId: item._id,
-      payload: deliveryDetails,
-    };
+
+    const payload = changePreviousDays
+      ? {
+          ...deliveryDetails,
+          deliveryDate: dayjs.utc(selectedDate).toISOString(),
+        }
+      : {...deliveryDetails};
+
     // const dispatchR = dispatch(userConfirmDelivery(arg));
     _subscriptionService
-      .employeeConfirmDelivery(item._id, deliveryDetails)
+      .employeeConfirmDelivery(item._id, payload)
       .then(res => {
-        console.log(res, 'From SubscriptionCalendar');
+        console.log(payload, 'From SubscriptionCalendar');
         setLoading(false);
+        setOpenChangeDateModal(false);
+        setDeliveryForMarker([...deliveryForMarker, payload]);
       })
       .catch(err => {
+        setOpenChangeDateModal(false);
         console.log(err);
       });
 
@@ -65,11 +78,10 @@ const SubscriptionCalendar = ({item}: any) => {
     setStartUseEffect(!startUseEffect);
   };
 
-  useEffect(() => {
-    // console.log('useEffect', selectedDate);
+  const updateMarker = (delivery: any) => {
     const markedDates: any = {};
     // setSingleSubscription(item);
-    item?.deliveries?.map((delivery: any) => {
+    deliveryForMarker?.map((delivery: any) => {
       const date = dayjs(delivery.date).format('YYYY-MM-DD');
       markedDates[date] = (markedDates[date] && [
         ...markedDates[date],
@@ -77,37 +89,44 @@ const SubscriptionCalendar = ({item}: any) => {
       ]) || [{status: delivery.status}];
     });
 
-    setMarkedDates(markedDates);
+    setMarkedDates({...markedDates});
 
-    let total = 0;
-    singleSubscription?.deliveries?.map((delivery: any) => {
+    let totalDeliveredDone = 0;
+    let totalReturnDone = 0;
+    // singleSubscription?.deliveries?
+    deliveryForMarker.map((delivery: any) => {
       if (
         delivery.status === 'Delivered' &&
         //  month
         dayjs(delivery.date).format('MMMM') ===
           dayjs(selectedDate).format('MMMM')
       ) {
-        total += delivery.quantity;
+        totalDeliveredDone += +delivery.quantity;
       }
-      setTotalDeilivered(total);
+      totalReturnDone += +delivery.returnQuantity;
     });
+    setTotalDeilivered(totalDeliveredDone);
+    setTotalReturn(totalReturnDone);
+  };
+
+  useEffect(() => {
+    updateMarker(deliveryForMarker);
+  }, [deliveryForMarker]);
+
+  useEffect(() => {
+    updateMarker(deliveryForMarker);
 
     const index = dayjs(selectedDate).month();
     const seletctedDateISO = dayjs(selectedDate).toISOString();
+    const deliveryStartDate = dayjs(selectedDate).startOf('day').toISOString();
+    const deliveryEndDate = dayjs(selectedDate).endOf('day').toISOString();
     _subscriptionService
       .getSubscriptionDetails({
-        startDate: dayjs(selectedDate)
-          .startOf('day')
-          // .startOf('month')
-          .toISOString(),
-        endDate: dayjs(selectedDate)
-          // .endOf('month')
-          .endOf('day')
-          .toISOString(),
-        type: 'user',
+        deliveryStartDate,
+        deliveryEndDate,
+        // type: 'user',
       })
       .then(res => {
-        console.log(res, 'From SubscriptionCalendar fetch');
         setSingleSubscription(res.data[0]);
       });
   }, [selectedDate, startUseEffect]);
@@ -125,13 +144,15 @@ const SubscriptionCalendar = ({item}: any) => {
       selectedDate === dayjs().format('YYYY-MM-DD')
     ) {
       setOpenConfirmModal(true);
-    } else {
-      alert('Select Status and Only todays Date');
+    } else if (deliveryDetails.status == '') {
+      alert('Select Status');
+    } else if (
+      deliveryDetails.status !== '' &&
+      selectedDate !== dayjs().format('YYYY-MM-DD')
+    ) {
+      setOpenChangeDateModal(true);
     }
   };
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
 
   return (
     <View style={{padding: 5}}>
@@ -367,30 +388,49 @@ const SubscriptionCalendar = ({item}: any) => {
             <Text className="text-lg font-bold text-green-500">Quantity</Text>
             <Text className="text-lg font-bold text-green-500">Time</Text>
             <Text className="text-lg font-bold text-green-500">Status</Text>
+            <Text className="text-lg font-bold text-green-500">Return</Text>
           </View>
         )}
       {singleSubscription?.deliveries?.map((delivery: any, index: number) => {
-        // if (dayjs(delivery.date).format('YYYY-MM-DD') !== selectedDate) {
-        //   return null;
-        // }
+        if (dayjs(delivery.date).format('YYYY-MM-DD') !== selectedDate) {
+          return null;
+        }
+
         return (
-          <View
-            key={delivery.deliveryId}
-            className="flex-row items-center justify-between my-2 bg-gray-100 rounded-md p-1 py-2">
-            <Text className="text-lg font-bold text-green-500">
-              {delivery.quantity}
-            </Text>
-            <Text className="text-lg font-bold text-green-500">
-              {dayjs(delivery.date).format('hh:mm A')}
-            </Text>
-            <Text className="text-lg font-bold text-green-500">
-              {delivery.status}
-            </Text>
+          <View key={delivery.deliveryId}>
+            <View
+              key={delivery.deliveryId}
+              className="flex-row items-center justify-between my-2 bg-gray-100 rounded-md p-1 py-2">
+              <Text className="text-lg font-bold">{delivery.quantity}</Text>
+              <Text className="text-lg font-bold ">
+                {dayjs(delivery.date).format('hh:mm A')}
+              </Text>
+              <Text
+                className={
+                  // "text-lg font-bold text-green-500"
+                  delivery.status === 'Delivered'
+                    ? 'text-lg font-bold text-green-500'
+                    : delivery.status === 'Undelivered'
+                    ? 'text-lg font-bold text-red-500'
+                    : 'text-lg font-bold text-yellow-500'
+                }>
+                {delivery.status}
+              </Text>
+              <Text className="text-lg font-bold ">
+                {delivery.returnQuantity}
+              </Text>
+            </View>
+            {/* total Given and Return */}
           </View>
         );
       })}
 
       {/* Table End */}
+      <View className="flex w-full p-1 rounded-lg bg-red-500 items-center justify-center mt-1">
+        <Text className="text-white font-bold tracking-widest text-xl">
+          Total Return {totalReturn}
+        </Text>
+      </View>
 
       {/* Feedback Input */}
       <View className="flex  justify-between mt-2">
@@ -428,13 +468,36 @@ const SubscriptionCalendar = ({item}: any) => {
           <View className="flex-row items-center justify-around mt-2">
             <TouchableOpacity
               className="bg-green-400 px-4 py-2 text-white rounded-xl"
-              onPress={handleDeliveryStatus}>
+              onPress={() => handleDeliveryStatus()}>
               <Text className="text-white">Yes</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setOpenConfirmModal(false)}
               className="bg-red-400 px-4 py-2 text-white rounded-xl">
               <Text className="text-white">Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal visible={openChangeDateModal}>
+        {/* Want to Edit Previous Days Detail */}
+        <View className="flex bg-white rounded-lg p-4 h-[130px] justify-between shadow border border-gray-200">
+          <View className="flex-row items-center justify-between">
+            <Text className="text-lg font-bold tracking-widest capitalize">
+              Edit Previous Dates?
+            </Text>
+          </View>
+          <View className="flex-row items-center justify-between mt-2">
+            <TouchableOpacity
+              className="bg-red-400 px-4 py-2 text-white rounded-xl"
+              onPress={() => setOpenChangeDateModal(false)}>
+              <Text className="text-white">No</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="bg-green-400 px-4 py-2 text-white rounded-xl"
+              onPress={() => handleDeliveryStatus(true)}>
+              <Text className="text-white">Yes</Text>
             </TouchableOpacity>
           </View>
         </View>

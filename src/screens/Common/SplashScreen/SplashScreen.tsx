@@ -14,7 +14,7 @@ const SplashScreen: React.FC<NavigationProps> = ({navigation}) => {
     setTimeout(() => {
       const {token} = getAuthCred();
       if (token.length > 10) {
-        dispatch(fetchBusinesses());
+        dispatch(fetchBusinesses({}));
         dispatch(fetchUserSubscriptions({}));
         navigation.replace('TabNavigation');
       } else {

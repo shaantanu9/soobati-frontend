@@ -280,6 +280,7 @@ const SubscriptionScreen = ({navigation}: NavigationProps) => {
           ref={openAddSubscriptionRef}
           memoArray={['25%', '50%', '96']}>
           <SubscriptionFormMerchant
+            selctedBusiness={''}
             closeSheet={() => openAddSubscriptionRef.current?.close()}
           />
         </BottomSheetCompParent>

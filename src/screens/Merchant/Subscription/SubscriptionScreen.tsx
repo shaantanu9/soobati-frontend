@@ -84,7 +84,6 @@ const SubscriptionScreen = () => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    console.log('user', user, 'user');
     if (isFocused) {
       dispatch(
         fetchUserSubscriptions({
@@ -254,7 +253,8 @@ const SubscriptionScreen = () => {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate(
-                      StackKeys.Merchant.SubscriptionDetailScreen,
+                      // "SubscriptionDetailMerchantScreen",
+                      StackKeys.Merchant.SubscriptionDetailMerchantScreen,
                       {item}
                     )
                   }>
@@ -298,6 +298,7 @@ const SubscriptionScreen = () => {
           ref={openAddSubscriptionRef}
           memoArray={['25%', '50%', '96']}>
           <SubscriptionForm
+
             closeSheet={() => openAddSubscriptionRef.current?.close()}
           />
         </BottomSheetCompParent>

@@ -56,6 +56,9 @@ export type RootStackParamList = {
   MerchantSettings: undefined;
   DeilveryPartnerSettings: undefined;
   MerchantHome: undefined;
+  SubscriptionDetailMerchantScreen: {
+    item: any;
+  };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -69,6 +72,8 @@ export default function StackNavigation() {
       // initialRouteName="DeliveryPartnerHome"
       // initialRouteName="MerchantHome"
       initialRouteName="SplashScreen"
+      // initialRouteName='SubscriptionScreen'
+
       // initialRouteName="AddProductScreen"
       // initialRouteName="AuthScreen"
       // initialRouteName="MerchantAccountSettingScreen"
@@ -147,9 +152,9 @@ export default function StackNavigation() {
         component={StackRoute.User.SubscriptionDetailScreen}
       />
 
-      <Stack.Screen 
-      name={'ProfileSettings'}
-      component={StackRoute.User.ProfileSettings}
+      <Stack.Screen
+        name={'ProfileSettings'}
+        component={StackRoute.User.ProfileSettings}
       />
 
       {/* Ecommerce */}
@@ -196,6 +201,10 @@ export default function StackNavigation() {
       <Stack.Screen
         name={'SubscriptionScreenMerchant'}
         component={StackRoute.Merchant.SubscriptionScreenMerchant}
+      />
+      <Stack.Screen
+        name={'SubscriptionDetailMerchantScreen'}
+        component={StackRoute.Merchant.SubscriptionDetailMerchantScreen}
       />
     </Stack.Navigator>
   );

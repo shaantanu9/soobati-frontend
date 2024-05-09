@@ -34,11 +34,13 @@ import TodaysOrders from '../screens/DeliveryPartner/TodaysOrder/TodaysOrder';
 // Merchant
 import MerchantAccountSettingScreen from '../screens/Merchant/MerchantAccountSetting/MerchantAccountSetting';
 import AddProductScreen from '../screens/Merchant/ProductManagment/AddProductScreen';
+import SubscriptionDetailMerchantScreen from '../screens/Merchant/Subscription/SubscriptionDetailScreen/SubscriptionDetailMerchantScreen';
 import SubscriptionDetailScreen from '../screens/User/Subscription/SubscriptionDetailScreen/SubscriptionDetailScreen';
-import SubscriptionScreenMerchant from '../screens/User/Subscription/SubscriptionScreenMerchant';
+
 import ProfileSettings from '../screens/Common/Settings/ProfileSettings';
-import { MerchantHome } from '../screens/Merchant/MerchantHome/MerchantHome';
-import DeliveryPartnerHome  from '../screens/DeliveryPartner/DeliveryPartnerHome/DeliveryPartnerHome';
+import DeliveryPartnerHome from '../screens/DeliveryPartner/DeliveryPartnerHome/DeliveryPartnerHome';
+import {MerchantHome} from '../screens/Merchant/MerchantHome/MerchantHome';
+import SubscriptionScreenMerchant from '../screens/Merchant/Subscription/SubscriptionScreenMerchant';
 
 export const StackRoute = {
   // Home,
@@ -73,7 +75,7 @@ export const StackRoute = {
   },
   DeliveryPartner: {
     TodaysOrders,
-    DeliveryPartnerHome
+    DeliveryPartnerHome,
   },
 
   Merchant: {
@@ -82,6 +84,7 @@ export const StackRoute = {
     MerchantAccountSettingScreen,
     SubscriptionScreenMerchant,
     MerchantHome,
+    SubscriptionDetailMerchantScreen,
   },
 };
 

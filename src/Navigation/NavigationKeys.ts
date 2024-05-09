@@ -69,7 +69,7 @@ export const StackKeys: {
     MyOrder: string;
     AddProductScreen: string;
     MerchantHome: string;
-    SubscriptionDetailScreen: string;
+    SubscriptionDetailMerchantScreen: string;
   };
 } = {
   Common: {
@@ -107,7 +107,7 @@ export const StackKeys: {
     MyOrder: 'MyOrder',
     AddProductScreen: 'AddProductScreen',
     MerchantHome: 'MerchantHome',
-    SubscriptionDetailScreen: 'SubscriptionDetailScreen',
+    SubscriptionDetailMerchantScreen: 'SubscriptionDetailMerchantScreen',
   },
 };
 

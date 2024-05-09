@@ -88,3 +88,21 @@ export interface ProductQueryPayload {
   skip?: number;
   businessId?: string;
 }
+
+export interface BuildBusinessQueryPayload {
+  businessId?: string;
+  businessName?: string;
+  businessType?: string;
+  ownerId?: string;
+  employeeId?: string;
+  employeeName?: string;
+  role?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  sortField?: string;
+  sortOrder?: string;
+  limit?: number;
+  skip?: number;
+  userId?: string;
+}

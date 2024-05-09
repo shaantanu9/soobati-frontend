@@ -1,11 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useNavigation} from '@react-navigation/native';
 import {
   BottomNavigation,
   BottomNavigationTab,
   Layout,
 } from '@ui-kitten/components';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ScrollView} from 'react-native';
 import {
   ArchiveBoxArrowDownIcon,
@@ -16,7 +15,7 @@ import {StackRoute} from '../../../Navigation/NavigationRoutes';
 import {DynamicTabView} from '../../../screens/TabComponent';
 import styles from '../../../styles';
 import MyOrdersScreen from '../OrderManagment/NewOrder';
-import SubscriptionDetailScreen from '../Subscription/SubscriptionDetailScreen/SubscriptionDetailScreen';
+import SubscriptionDetailScreen from '../Subscription/SubscriptionDetailScreen/SubscriptionDetailMerchantScreen';
 import SubscriptionScreen from '../Subscription/SubscriptionScreen';
 import HomeDashbaord from './HomeDashbaord';
 

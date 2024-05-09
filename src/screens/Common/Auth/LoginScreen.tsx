@@ -17,7 +17,6 @@ import {useAppDispatch} from '../../../hooks/useAppSelector';
 import {StackKeys} from '../../../Navigation/NavigationKeys';
 import {loginWithPassword} from '../../../redux/features/userThunk';
 import styles from '../../../styles/index';
-import appConfig from '../../../utils/config';
 import {NavigationProps} from '../../../utils/interface';
 
 const LoginScreen = ({navigation}: NavigationProps) => {
@@ -139,7 +138,7 @@ const LoginScreen = ({navigation}: NavigationProps) => {
               className="flex-row justify-center items-center ">
               <Text
                 className={`text-[${styles.darkPrimaryColor}] font-semibold`}>
-                Forgot Password? {appConfig.BASE_URL}
+                Forgot Password?
               </Text>
             </TouchableOpacity>
           </View>

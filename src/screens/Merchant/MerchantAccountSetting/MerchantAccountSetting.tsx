@@ -172,7 +172,7 @@ const MerchantAccountSettingScreen = ({
             label="Street*  "
             placeholder="Enter street address"
             onChangeText={value => handleAddressChange('street', value)}
-            disabled
+            // disabled
           />
           <Input
             className="mb-4"
@@ -180,7 +180,7 @@ const MerchantAccountSettingScreen = ({
             label="City*"
             placeholder="Enter city*"
             onChangeText={value => handleAddressChange('city', value)}
-            disabled
+            // disabled
           />
           <Input
             className="mb-4"
@@ -188,7 +188,7 @@ const MerchantAccountSettingScreen = ({
             label="State*"
             placeholder="Enter state"
             onChangeText={value => handleAddressChange('state', value)}
-            disabled
+            // disabled
           />
           <Input
             className="mb-4"
@@ -196,7 +196,7 @@ const MerchantAccountSettingScreen = ({
             label="Postal Code*"
             placeholder="Enter postal code"
             onChangeText={value => handleAddressChange('postalCode', value)}
-            disabled
+            // disabled
           />
           <Input
             className="mb-4"
@@ -204,7 +204,7 @@ const MerchantAccountSettingScreen = ({
             label="Country *"
             placeholder="Enter country"
             onChangeText={value => handleAddressChange('country', value)}
-            disabled
+            // disabled
           />
 
           <Button

@@ -1,5 +1,6 @@
 import {Modal} from '@ui-kitten/components';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import React, {useEffect, useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {Calendar} from 'react-native-calendars';
@@ -17,6 +18,7 @@ import {userConfirmDelivery} from '../../../redux/features/subscription/subscrip
 import {_subscriptionService} from '../../../services/api/subscription';
 import styles from '../../../styles';
 import MyText from './MyText';
+dayjs.extend(utc);
 const SubscriptionCalendar = ({item}: any) => {
   const [deliveryDetails, setDeliveryDetails] = useState({
     status: '',
@@ -27,7 +29,7 @@ const SubscriptionCalendar = ({item}: any) => {
     dayjs().format('YYYY-MM-DD'),
   );
 
-  const [singleSubscription, setSingleSubscription] = useState<any>(item);
+  const [singleSubscription, setSingleSubscription] = useState<any>({...item});
 
   const [markedDates, setMarkedDates] = useState<any>({});
   const [totalDeilivered, setTotalDeilivered] = useState(0);
@@ -82,20 +84,23 @@ const SubscriptionCalendar = ({item}: any) => {
 
     const index = dayjs(selectedDate).month();
     const seletctedDateISO = dayjs(selectedDate).toISOString();
+    const deliveryStartDate = dayjs
+      .utc(selectedDate)
+      .startOf('day')
+      .toISOString();
+    const deliveryEndDate = dayjs.utc(selectedDate).endOf('day').toISOString();
     _subscriptionService
       .getSubscriptionDetails({
-        startDate: dayjs(selectedDate)
-          .startOf('day')
-          // .startOf('month')
-          .toISOString(),
-        endDate: dayjs(selectedDate)
-          // .endOf('month')
-          .endOf('day')
-          .toISOString(),
+        deliveryStartDate,
+        deliveryEndDate,
         type: 'user',
       })
       .then(res => {
-        console.log(res, 'From SubscriptionCalendar fetch');
+        console.log(res, 'From SubscriptionCalendar fetch', {
+          deliveryStartDate,
+          deliveryEndDate,
+          type: 'user',
+        });
         setSingleSubscription(res.data[0]);
       });
 
@@ -130,9 +135,6 @@ const SubscriptionCalendar = ({item}: any) => {
       alert('Select Status and Only todays Date');
     }
   };
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
 
   return (
     <View style={{padding: 5}}>
@@ -357,9 +359,9 @@ const SubscriptionCalendar = ({item}: any) => {
           </View>
         )}
       {singleSubscription?.deliveries?.map((delivery: any, index: number) => {
-        // if (dayjs(delivery.date).format('YYYY-MM-DD') !== selectedDate) {
-        //   return null;
-        // }
+        if (dayjs(delivery.date).format('YYYY-MM-DD') !== selectedDate) {
+          return null;
+        }
         return (
           <View
             key={delivery.deliveryId}

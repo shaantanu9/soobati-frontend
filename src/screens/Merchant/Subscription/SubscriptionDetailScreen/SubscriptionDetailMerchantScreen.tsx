@@ -49,7 +49,7 @@ const SubscriptionDetail = ({navigation}: NavigationProps) => {
   );
 };
 
-const SubscriptionDetailScreen = ({navigation}: NavigationProps) => {
+const SubscriptionDetailMerchantScreen = ({navigation}: NavigationProps) => {
   const route = useRoute();
   const {item}: any = route.params;
   return (
@@ -67,7 +67,7 @@ const SubscriptionDetailScreen = ({navigation}: NavigationProps) => {
     </>
   );
 };
-export default SubscriptionDetailScreen;
+export default SubscriptionDetailMerchantScreen;
 
 const styles = StyleSheet.create({
   container: {

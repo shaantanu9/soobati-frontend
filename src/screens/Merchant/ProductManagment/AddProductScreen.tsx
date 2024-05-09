@@ -167,7 +167,7 @@ const AddProductScreen = ({hideHeader, closeSheet}: any) => {
             ...prev,
             [subField]: {
               ...prev[subField],
-              [name]: newValue,
+              [name]: +newValue,
             },
           };
         } else {

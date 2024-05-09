@@ -139,9 +139,7 @@ const SubscriptionDetailScreen = ({navigation}: NavigationProps) => {
   const {item}: any = route.params;
   return (
     <>
-      <View style={styles.header}
-      className='mt-2'
-      >
+      <View style={styles.header} className="mt-2">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <ChevronLeftIcon size={24} color="#000" />
         </TouchableOpacity>
@@ -190,5 +188,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  
 });

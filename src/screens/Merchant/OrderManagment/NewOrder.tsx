@@ -1,5 +1,6 @@
 import {
   CheckBox,
+  Datepicker,
   Input,
   Modal,
   Select,
@@ -33,9 +34,9 @@ dayjs.extend(utc);
 const DeliveryStatus = [
   'Pending',
   'Assigned',
+  'Delivered',
   'Cancelled',
   'Undelivered',
-  'Delivered',
 ];
 
 const MyOrdersScreen = () => {
@@ -56,24 +57,50 @@ const MyOrdersScreen = () => {
   const selectedBusinessIndex = businesses.findIndex(
     business => business._id === selectedBusiness?._id,
   );
+  const [selctedDate, setSelctedDate] = useState(dayjs().format('YYYY-MM-DD'));
+  const [updateOrder, setUpdateOrder] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchData, setSearchData] = useState([...orders]);
 
   useEffect(() => {
-    _subscriptionService
-      .getUpcomingDeliveries({
-        status: activeTab === 'Assigned' ? 'Pending' : activeTab,
-        businessId: selectedBusiness?._id,
-      })
-      .then(res => {
-        if (res.statusCode === 200) {
-          console.log('res.data get todayDeliveries', res?.data);
-          setOrders(res?.data);
-        }
-      });
-  }, [activeTab]);
+    const firstcondition = ['Pending', 'Assigned'].includes(activeTab);
+    if (!firstcondition) {
+      _subscriptionService
+        .getTodaysDeliveries({
+          status: activeTab,
+          businessId: selectedBusiness?._id,
+          date: selctedDate,
+        })
+        .then(res => {
+          if (res.statusCode === 200) {
+            // console.log('res.data get todayDeliveries', res?.data);
+            setOrders(res?.data);
+            setSearchData(res?.data);
+          }
+        })
+        .catch(err => {
+          console.log('err', err);
+        });
+    } else {
+      _subscriptionService
+        .getUpcomingDeliveries({
+          // deliveryStatus: activeTab === 'Assigned' ? 'Pending' : activeTab,
+          businessId: selectedBusiness?._id,
+          nextDeliveryDate: dayjs().format('YYYY-MM-DD'),
+        })
+        .then(res => {
+          if (res.statusCode === 200) {
+            // console.log('res.data get todayDeliveries', res?.data);
+            setOrders(res?.data);
+            setSearchData(res?.data);
+          }
+        });
+    }
+  }, [activeTab, updateOrder, selectedBusiness, selctedDate]);
 
   useEffect(() => {
     const employeeList = selectedBusiness?.employees;
-    console.log('employeeList', employeeList);
+    // console.log('employeeList', employeeList);
     setEmployees(employeeList);
   }, [selectedBusiness]);
 
@@ -83,18 +110,38 @@ const MyOrdersScreen = () => {
   };
 
   const assignDeliveryToEmployee = () => {
-    console.log('assignDeliveryToEmployee', subscriptionIds, selectedEmployee);
+    console.log(
+      'assignDeliveryToEmployee',
+      subscriptionIds,
+      selectedEmployee,
+      selectedEmployee._id,
+      'selectedEmployee',
+      selectedEmployee.employeeId,
+    );
     _subscriptionService
       .assignDeliveryToEmployee({
         subscriptionIds,
-        employeeId: selectedEmployee._id,
+        employeeId: selectedEmployee.employeeId,
       })
       .then(res => {
         if (res.statusCode === 200) {
-          console.log('res.data', res?.data);
+          // console.log('res.data', res?.data);
         }
       });
   };
+
+  useEffect(() => {
+    if (searchTerm) {
+      const filteredData = orders.filter((order: any) => {
+        return order.customerName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchData(filteredData);
+    } else {
+      setSearchData(orders);
+    }
+  }, [searchTerm]);
 
   // Function to render the tab button
   const renderTabButton = (label: any) => (
@@ -214,6 +261,17 @@ const MyOrdersScreen = () => {
       )}
 
       <View className="bg-white rounded-full border flex-row justify-start items-center space-x-2 px-2 border-gray-300">
+        <Datepicker
+          date={dayjs(selctedDate).toDate()}
+          onSelect={(nextDate: Date) =>
+            setSelctedDate(dayjs(nextDate).format('YYYY-MM-DD'))
+          }
+          size="small"
+          style={{
+            borderRadius: 50,
+            borderColor: 'transparent',
+          }}
+        />
         <MagnifyingGlassIcon size={20} color="gray" />
         <TextInput
           placeholder="Search"
@@ -221,27 +279,30 @@ const MyOrdersScreen = () => {
           style={{
             width: wp('70%'),
           }}
+          value={searchTerm}
+          onChangeText={text => setSearchTerm(text)}
         />
-        <TouchableOpacity onPress={() => setFilterModalVisible(true)}>
+        <TouchableOpacity>
           <FilterIcon />
         </TouchableOpacity>
         {renderFilterModal()}
       </View>
 
       <ScrollView className="flex-1 px-4">
-        {orders.map((order: any, index: number) => (
+        {searchData.map((order: any, index: number) => (
           //
-          <>
-            <OrderCard
-              key={index}
-              order={order}
-              status={activeTab}
-              selectedEmployee={selectedEmployee}
-              setSelectedEmployee={setSelectedEmployee}
-              subscriptionIds={subscriptionIds}
-              setSubscriptionIds={setSubscriptionIds}
-            />
-          </>
+
+          <OrderCard
+            key={index}
+            order={order}
+            status={activeTab}
+            selectedEmployee={selectedEmployee}
+            setSelectedEmployee={setSelectedEmployee}
+            subscriptionIds={subscriptionIds}
+            setSubscriptionIds={setSubscriptionIds}
+            setUpdateOrder={setUpdateOrder}
+            updateOrder={updateOrder}
+          />
         ))}
       </ScrollView>
 
@@ -262,9 +323,10 @@ const OrderCard = ({
 
   subscriptionIds,
   setSubscriptionIds,
+  setUpdateOrder,
+  updateOrder,
 }: any) => {
-  const DeliveryStatus = ['Pending', 'Cancelled', 'Undelivered', 'Delivered'];
-
+  const DeliveryStatus = ['Pending', 'Cancelled', 'Delivered', 'Undelivered'];
   const [deliveryData, setDeliveryData] = useState<any>({
     quantity: order?.deliveries[order?.deliveries?.length - 1]?.quantity,
     returnQuantity: 0,
@@ -274,20 +336,22 @@ const OrderCard = ({
   const [returnQuantity, setReturnQuantity] = useState<any>();
   const [modalVisible, setModalVisible] = useState(false);
   const [employees, setEmployees] = useState<any>([]);
+  const [showData, setShowData] = useState(false);
 
   const confirmDelivery = () => {
-    console.log('confirmDelivery');
     _subscriptionService
       .employeeConfirmDelivery(order._id, {
-        deliveryId: order.deliveries[order.deliveries.length - 1].deliveryId,
+        deliveryId:
+          order?.deliveries[order.deliveries.length - 1]?.deliveryId || null,
         quantity: deliveryData.quantity,
         returnQuantity: deliveryData.returnQuantity,
         status: deliveryData.status,
       })
       .then(res => {
         if (res.statusCode === 200) {
-          console.log('res.data', res?.data);
+          // console.log('res.data', res?.data);
           setModalVisible(false);
+          setUpdateOrder(!updateOrder);
         }
       });
   };
@@ -295,11 +359,16 @@ const OrderCard = ({
   const totalDetail = () => {
     let deliverydone = 0;
     let returnDone = 0;
+
+    // order.deliveries.map((item: any) => {
+    //   return item.status == status && setShowData(true);
+    // });
+
     order.deliveries.map((item: any) => {
       if (item.status === 'Delivered') {
         deliverydone += item.quantity;
       }
-      console.log('item.returnQuantity', item.returnQuantity);
+      // console.log('item.returnQuantity', item.returnQuantity);
       returnDone += item.returnQuantity;
       setDeliverQuantity(deliverydone);
       setReturnQuantity(returnDone);
@@ -310,6 +379,8 @@ const OrderCard = ({
   const selectedBusiness = useAppSelector(
     state => state.business.selectedBusiness,
   );
+  const [assignedEmployee, setAssignedEmployee] = useState<any>('owner');
+  const [assignedTime, setAssignedTime] = useState<any>('');
 
   useEffect(() => {
     setDeliveryData({
@@ -320,8 +391,21 @@ const OrderCard = ({
     totalDetail();
 
     const employeeList = selectedBusiness?.employees;
-    console.log('employeeList', employeeList);
     setEmployees(employeeList);
+    console.log('order.deliveries', order.deliveries);
+    for (let i = 0; i < order.deliveries.length; i++) {
+      if (order.deliveries[i].status == status) {
+        setShowData(true);
+        break;
+      }
+      if (
+        order.deliveries[i].status == 'Pending' ||
+        order.deliveries[i].employeeName
+      ) {
+        setAssignedEmployee(order.deliveries[i].employeeName);
+        setAssignedTime(order.deliveries[i].date);
+      }
+    }
   }, []);
 
   const saveHandler = () => {
@@ -340,6 +424,10 @@ const OrderCard = ({
       setSubscriptionIds([...subscriptionIds, id]);
     }
   };
+
+  // if (!showData) {
+  //   return <></>;
+  // }
 
   return (
     <View className="flex justify-between items-start bg-white my-2 p-2 rounded-lg shadow-md">
@@ -384,6 +472,18 @@ const OrderCard = ({
         </View>
       </View>
 
+      {status == 'Assigned' && (
+        <View>
+          <Text className=" text-xs">
+            Assigned to {assignedEmployee || 'No Employee'}
+          </Text>
+          <Text className=" text-xs">
+            
+            {dayjs.utc(assignedTime).format('DD MMM, YYYY HH:mm A')} 
+          </Text>
+        </View>
+      )}
+
       {/* border */}
       {status == 'Pending' && (
         <>
@@ -391,24 +491,30 @@ const OrderCard = ({
           <View className="flex-row justify-between items-center w-full">
             <View>
               <Input
-                label={'Given ' + deliveryData.quantity}
+                label={'Given ' + (deliveryData?.quantity || 1)}
                 className="border border-gray-300 rounded-lg p-2 w-20"
-                value={deliveryData?.quantity}
-                placeholder={' ' + deliveryData.quantity}
+                value={deliveryData?.quantity?.toString() || '1'}
+                placeholder={' ' + (deliveryData?.quantity || 1)}
                 onChangeText={text =>
-                  setDeliveryData({...deliveryData, quantity: text})
+                  setDeliveryData({
+                    ...deliveryData,
+                    quantity: parseInt(text || '0'),
+                  })
                 }
                 keyboardType="numeric"
               />
             </View>
             <View>
               <Input
-                label={'Return ' + deliveryData.returnQuantity}
+                label={'Return ' + (deliveryData.returnQuantity || 0)}
                 className="border border-gray-300 rounded-lg p-2 w-20"
-                value={deliveryData?.returnQuantity}
-                placeholder={' ' + deliveryData.returnQuantity}
+                value={deliveryData?.returnQuantity?.toString() || 0}
+                placeholder={' ' + (deliveryData?.returnQuantity || 0)}
                 onChangeText={text =>
-                  setDeliveryData({...deliveryData, returnQuantity: text})
+                  setDeliveryData({
+                    ...deliveryData,
+                    returnQuantity: parseInt(text || '0'),
+                  })
                 }
                 keyboardType="numeric"
               />

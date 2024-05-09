@@ -1,4 +1,5 @@
 // business.service.ts
+import { BuildBusinessQueryPayload } from '../../../utils/interface';
 import {
   ADD_EMPLOYEE_TO_BUSINESS,
   CREATE_BUSINESS,
@@ -29,8 +30,8 @@ export class BusinessService extends HttpService {
     return await this.delete(DELETE_BUSINESS(businessId));
   }
 
-  async listBusinesses() {
-    return await this.get(LIST_BUSINESSES);
+  async listBusinesses(payload:BuildBusinessQueryPayload) {
+    return await this.get(LIST_BUSINESSES, payload);
   }
 
   async getBusinessDetails(businessId: string) {

@@ -95,6 +95,7 @@ export class SubscriptionService extends HttpService {
     businessId: string;
     status?: string;
     date?: string;
+    type?: string;
   }) {
     return await this.get(GET_TODAYS_DELIVERIES, payload);
   }

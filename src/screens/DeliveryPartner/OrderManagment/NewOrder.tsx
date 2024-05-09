@@ -1,3 +1,4 @@
+import {useIsFocused} from '@react-navigation/native';
 import {Input, Modal, Select, SelectItem} from '@ui-kitten/components';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -18,10 +19,11 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import images from '../../../assets/images';
 import {FilterIcon, MessageIcon} from '../../../assets/svg';
 import {useAppDispatch, useAppSelector} from '../../../hooks/useAppSelector';
+import {selectBusiness} from '../../../redux/features/business/businessSlice';
+import {fetchBusinesses} from '../../../redux/features/business/businessThunk';
 import {DynamicTabView} from '../../../screens/TabComponent';
 import {_subscriptionService} from '../../../services/api/subscription';
 import styles from '../../../styles';
-import { selectBusiness } from '../../../redux/features/business/businessSlice';
 dayjs.extend(utc);
 
 const DeliveryStatus = ['Pending', 'Cancelled', 'Undelivered', 'Delivered'];
@@ -45,22 +47,17 @@ const MyOrdersScreen = () => {
     state => state.business.selectedBusiness,
   );
 
-  // useEffect(() => {
-  //   _subscriptionService.getUpcomingDeliveriesForEmployee().then(res => {
-  //     if (res.statusCode === 200) {
-  //       console.log('res.data', res?.data);
-  //       setOrders(res?.data);
-  //     }
-  //   });
-  // }, []);
-
-  // const filteredOrders = (data)=>{
-
-  // }
   const selectBusinessHandler = (index: any) => {
-    // console.log(index, businesses[index.row]._id, 'selectBusinessHandler')
     dispatch(selectBusiness(businesses[index.row]._id));
   };
+
+  const focused = useIsFocused();
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(fetchBusinesses({role: 'employee'}));
+    }, 50);
+  }, [focused]);
 
   useEffect(() => {
     _subscriptionService
@@ -68,14 +65,14 @@ const MyOrdersScreen = () => {
         status: activeTab,
         businessId: selectedBusiness?._id,
         date: dayjs.utc().format('YYYY-MM-DD'),
+        type: 'employee',
       })
       .then(res => {
         if (res.statusCode === 200) {
-          console.log('res.data get todayDeliveries', res?.data);
           setOrders(res?.data);
         }
       });
-  }, [activeTab]);
+  }, [activeTab, selectedBusiness]);
 
   // Function to render the tab button
   const renderTabButton = (label: any) => (
@@ -137,7 +134,7 @@ const MyOrdersScreen = () => {
   return (
     <View className="flex-1 p-2">
       <View className="py-2">
-      <View
+        <View
           className="flex-row justify-between items-center"
           // className='flex-row justify-between items-center px-4 py-2 bg-white rounded-lg shadow-md border border-gray-300'
         >
@@ -225,7 +222,7 @@ const OrderCard = ({order, status}: any) => {
       if (item.status === 'Delivered') {
         deliverydone += item.quantity;
       }
-      console.log('item.returnQuantity', item.returnQuantity);
+      console.log('item.returnQuantity', item?.returnQuantity);
       returnDone += item.returnQuantity;
       setDeliverQuantity(deliverydone);
       setReturnQuantity(returnDone);
@@ -288,22 +285,25 @@ const OrderCard = ({order, status}: any) => {
           <View className="flex-row justify-between items-center w-full">
             <View>
               <Input
-                label={'Given ' + deliveryData.quantity}
+                label={'Given ' + deliveryData?.quantity}
                 className="border border-gray-300 rounded-lg p-2 w-20"
-                value={deliveryData?.quantity}
+                value={deliveryData?.quantity?.toString()}
                 onChangeText={text =>
-                  setDeliveryData({...deliveryData, quantity: text})
+                  setDeliveryData({...deliveryData, quantity: parseInt(text)})
                 }
                 keyboardType="numeric"
               />
             </View>
             <View>
               <Input
-                label={'Return ' + deliveryData.returnQuantity}
+                label={'Return ' + deliveryData?.returnQuantity}
                 className="border border-gray-300 rounded-lg p-2 w-20"
-                value={deliveryData?.returnQuantity}
+                value={deliveryData?.returnQuantity?.toString()}
                 onChangeText={text =>
-                  setDeliveryData({...deliveryData, returnQuantity: text})
+                  setDeliveryData({
+                    ...deliveryData,
+                    returnQuantity: parseInt(text),
+                  })
                 }
                 keyboardType="numeric"
               />

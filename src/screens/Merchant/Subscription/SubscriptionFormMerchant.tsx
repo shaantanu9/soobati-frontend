@@ -197,7 +197,9 @@ const SubscriptionFormMerchant = ({
               productState?.selectedProduct?._id === product?._id &&
               'bg-red-300'
             }
-            `}>
+            `}
+            key={product._id}
+            >
             <TouchableOpacity
               onPress={handleProductSelect(product._id)}
               key={product._id}>
