@@ -309,7 +309,7 @@ const SubscriptionCalendar = ({item}: any) => {
             }));
           }}>
           <Text
-            className={`text-sm font-bold text-[${
+            className={` font-bold text-[${
               styles.darkPrimaryColor
             }] py-1 px-1 rounded-xl border
               ${
@@ -331,7 +331,7 @@ const SubscriptionCalendar = ({item}: any) => {
             }));
           }}>
           <Text
-            className={`text-sm font-bold text-[${
+            className={` font-bold text-[${
               styles.darkPrimaryColor
             }] p-1 rounded-xl border
               ${
@@ -353,9 +353,9 @@ const SubscriptionCalendar = ({item}: any) => {
             }));
           }}>
           <Text
-            className={`text-lg font-bold text-[${
+            className={` font-bold text-[${
               styles.darkPrimaryColor
-            }] p-2 rounded-xl border
+            }] p-1 rounded-xl border
               ${
                 deliveryDetails.status === 'Delivered' &&
                 `bg-[${styles.darkPrimaryColor}] text-white`
@@ -367,7 +367,33 @@ const SubscriptionCalendar = ({item}: any) => {
             Delivered
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setDeliveryDetails(prev => ({
+              ...prev,
+              status: 'Pending',
+            }));
+          }}>
+          <Text
+            className={` font-bold text-[${
+              styles.darkPrimaryColor
+            }] p-1 rounded-xl border
+              ${
+                deliveryDetails.status === 'Pending' &&
+                `bg-[${styles.darkPrimaryColor}] text-white`
+              }
+              `}
+            style={{
+              borderColor: styles.darkPrimaryColor,
+            }}>
+            Pending
+          </Text>
+        </TouchableOpacity>
+      </View>
 
+      <View
+      className='mt-2'
+      >
         <TouchableOpacity onPress={handleSave}>
           <Text
             className={`text-center text-lg font-bold text-[${styles.darkPrimaryColor}] p-2 rounded-xl border`}

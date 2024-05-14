@@ -101,10 +101,10 @@ export const uploadImageToImageKit = async (
     publicKey: 'public_FDC/RCuLLeKyD5vinpopNKvqd0U=',
     urlEndpoint: 'https://ik.imagekit.io/soobati/',
   });
-  console.log('Inside uploadImageToImageKit function', images, folderName);
+  // console.log('Inside uploadImageToImageKit function', images, folderName);
   const uploadPromises = images.map(async (uri: any) => {
     const auth = await _productService.getImageKitAuth();
-    console.log('Inside uploadPromise function');
+    // console.log('Inside uploadPromise function');
     return new Promise((resolve, reject) => {
       imagekit.upload(
         {

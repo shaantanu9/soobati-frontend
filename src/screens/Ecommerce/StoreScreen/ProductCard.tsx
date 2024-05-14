@@ -1,15 +1,15 @@
-import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {useAppDispatch} from '../../../hooks/useAppSelector';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { StackKeys } from '../../../Navigation/NavigationKeys';
 import {
   addItemToCart,
   CartItemProps,
 } from '../../../redux/features/cart/cartThunk';
 import styles from '../../../styles';
-import { StackKeys } from '../../../Navigation/NavigationKeys';
 const Cat4 = ({product}: any) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const Cat4 = ({product}: any) => {
       });
   };
 
-  console.log('product', product);
+
   return (
     <View className="flex items-start bg-white border border-gray-200 rounded-lg m-2 overflow-hidden">
       {/* Product Image */}
@@ -48,7 +48,13 @@ const Cat4 = ({product}: any) => {
       </View>
 
       {/* Product Info */}
-      <TouchableOpacity className="p-4" onPress={() => navigation.navigate(StackKeys.Ecommerce.ProductDetail,{data:product})}>
+      <TouchableOpacity
+        className="p-4"
+        onPress={() =>
+          navigation.navigate(StackKeys.Ecommerce.ProductDetail, {
+            data: product,
+          })
+        }>
         <Text className="text-lg font-semibold capitalize">{product.name}</Text>
 
         {/* Rating and Reviews */}
@@ -77,7 +83,7 @@ const Cat4 = ({product}: any) => {
             (item: any, index: number) =>
               index <= 1 && (
                 <>
-                  <Text>item?.value</Text>
+                  <Text>{item?.value}</Text>
                 </>
               ),
           )}
@@ -90,7 +96,11 @@ const Cat4 = ({product}: any) => {
           <TouchableOpacity
             onPress={handleAddToCart}
             disabled={loading}
-            className={`bg-[${styles.darkPrimaryColor}] text-white rounded px-4 py-2 w-90`}>
+            // bg-['#494ae2']
+            // bg-yellow-500
+            className={`
+             bg-[${styles.darkPrimaryColor}]
+             text-white rounded px-4 py-2 w-90`}>
             {loading && (
               <Progress.Circle size={20} indeterminate={true} color="white" />
             )}
@@ -166,5 +176,6 @@ export {
   // Cat1,
   //  Cat2,
   //   Cat3,
-  Cat4,
+  Cat4
 };
+

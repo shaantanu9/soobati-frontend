@@ -21,12 +21,14 @@ import {
 } from '../../../redux/features/cart/cartThunk';
 import style from '../../../styles/index';
 import {NavigationProps} from '../../../utils/interface';
+
 const Cart = ({navigation}: NavigationProps) => {
   const route = useRoute();
   const data: any = route.params;
   // const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const cart = useAppSelector(state => state.cart);
+  const cartItems = useAppSelector(state => state.cart.items);
 
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -36,14 +38,16 @@ const Cart = ({navigation}: NavigationProps) => {
 
   useEffect(() => {
     dispatch(fetchCart());
+
+    console.log('KEYS KEYS', cart, 'cartItems');
   }, []);
 
-  if (!cart)
-    return (
-      <View>
-        <Text>No data</Text>
-      </View>
-    );
+  // if (!cart)
+  //   return (
+  //     <View>
+  //       <Text>No data</Text>
+  //     </View>
+  //   );
 
   return (
     <View className="bg-gray-50 flex-1 px-4">
@@ -62,65 +66,74 @@ const Cart = ({navigation}: NavigationProps) => {
         </TouchableOpacity>
       </SafeAreaView>
 
-      <View className="mb-2">
-        <View
-          className={`flex-row justify-between items-center 
+      {cart?.items?.length > 0 && (
+        <>
+          <View className="mb-2">
+            <View
+              className={`flex-row justify-between items-center 
           bg-[${style.darkPrimaryColor}] text-white
           rounded-lg shadow-md mt-4
           p-4
           `}>
-          <Text className="text-md font-bold text-white">
-            Total Items: {cart?.totalQuantity}
-          </Text>
-          <Text className="text-md font-bold text-white">
-            Total Price: {cart?.totalPrice}
-          </Text>
-        </View>
-      </View>
-      {cart.items && (
-        <>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            className="space-y-4">
-            {cart.items.map((item: any) => (
-              <CartCard key={item._id} item={item} />
-            ))}
-          </ScrollView>
+              <Text className="text-md font-bold text-white">
+                Total Items: {cart?.totalQuantity}
+              </Text>
+              <Text className="text-md font-bold text-white">
+                Total Price: {cart?.totalPrice}
+              </Text>
+            </View>
+          </View>
+          {cart.items && (
+            <>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                className="space-y-4">
+                {cart.items.map((singleProduct: any) => (
+                  <CartCard
+                    key={singleProduct?._id}
+                    singleProduct={singleProduct}
+                  />
+                ))}
+              </ScrollView>
+            </>
+          )}
+          <TouchableOpacity
+            onPress={() =>
+              cart.items.length &&
+              navigation.navigate(StackKeys.Ecommerce.OrderConfirmationScreen)
+            }
+            className={`flex-row justify-center items-center bg-[${style.darkPrimaryColor}] rounded-lg py-3 m-auto mb-2 w-full`}>
+            <Text className="text-white font-semibold">Checkout</Text>
+          </TouchableOpacity>
         </>
       )}
-      <TouchableOpacity
-        onPress={() =>
-          cart.items.length &&
-          navigation.navigate(StackKeys.Ecommerce.OrderConfirmationScreen)
-        }
-        className={`flex-row justify-center items-center bg-[${style.darkPrimaryColor}] rounded-lg py-3 m-auto mb-2 w-full`}>
-        <Text className="text-white font-semibold">Checkout</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 export default Cart;
 
-const CartCard = ({item}: any) => {
+const CartCard = ({singleProduct}: any) => {
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useAppDispatch();
   const [loading, setLoading] = React.useState(false);
 
-  const cart = useAppSelector(state => state.cart);
+  // const cart = useAppSelector(state => state.cart);
+
+  console.log("singleProduct", singleProduct, "singleProduct");
 
   const handleCartQuantity = (value: number) => {
     if (quantity === 1 && value === -1) {
       return;
     }
     setLoading(true);
-    if (item.productId.quantity < quantity + value) {
+    if (singleProduct.productId.quantity < quantity + value) {
       setLoading(false);
       return alert('Not enough quantity available');
     } else {
       dispatch(
         updateItemQuantity({
-          itemId: item._id,
+          itemId: singleProduct._id,
           quantity: quantity + value,
         }),
       )
@@ -150,28 +163,37 @@ const CartCard = ({item}: any) => {
         console.log('error');
       });
   };
+  console.log(
+    {
+      singleProduct,
+
+    },
+    'item in cart card 160',
+  );
 
   return (
     <View className="flex-row justify-between items-center my-2 p-1 rounded-lg border border-gray-300 bg-white shadow">
       <View className="flex-row justify-start items-start">
         <Image
-          source={{uri: item?.productId?.images[0]}}
+          source={{uri: singleProduct?.productId?.images[0]}}
           className="w-20 h-20"
           resizeMode="contain"
         />
         <View className="flex-col justify-start items-start ml-4">
-          <Text className="text-sm font-bold">{item?.productId?.name}</Text>
-          <Text className="text-xs font-semibold">
-            {item?.productId?.description}
-          </Text>
-          <Text className="text-sm font-semibold">
-            by {item?.productId?.businessName}
+          <Text className="text-sm font-bold">
+            {singleProduct?.productId?.name}
           </Text>
           <Text className="text-xs font-semibold">
-            {item?.productId?.price.toFixed(2)}
+            {singleProduct?.productId?.description}
           </Text>
           <Text className="text-sm font-semibold">
-            Pay Now {item?.pricePerUnit * quantity}
+            by {singleProduct?.productId?.businessName}
+          </Text>
+          <Text className="text-xs font-semibold">
+            {singleProduct?.productId?.price.toFixed(2)}
+          </Text>
+          <Text className="text-sm font-semibold">
+            Pay Now {singleProduct?.pricePerUnit * quantity}
           </Text>
         </View>
       </View>
@@ -195,7 +217,7 @@ const CartCard = ({item}: any) => {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              onPress={() => !loading && deleteCartItem(item._id)}
+              onPress={() => !loading && deleteCartItem(singleProduct._id)}
               disabled={loading}>
               {loading && (
                 <Progress.Circle

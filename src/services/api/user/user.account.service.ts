@@ -63,6 +63,30 @@ export class UserAccountService extends HttpService {
   async loginOTPVerify(payload: any) {
     return await this.post(LOGIN_USER_WITH_OTP, payload);
   }
+
+  async addAddress(payload: any) {
+    return await this.post(USER_PROFILE('add-address'), payload);
+  }
+
+  async updateAddress(payload: any) {
+    return await this.put(USER_PROFILE('update-address'), payload);
+  }
+
+  async deleteAddress(payload: any) {
+    return await this.delete(USER_PROFILE('delete-address'), payload);
+  }
+
+  async setDefaultAddress(payload: any) {
+    return await this.put(USER_PROFILE('set-default-address'), payload);
+  }
+
+  // async changePassword(payload: any) {
+  //   return await this.put(USER_PROFILE('change-password'), payload);
+  // }
+
+  async getAddresses() {
+    return await this.get(USER_PROFILE('get-addresses'));
+  }
 }
 
 export const _userAccountService = new UserAccountService();

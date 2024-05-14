@@ -1,0 +1,1811 @@
+
+// import {
+//     Component,
+//     ElementRef,
+//     EventEmitter,
+//     Input,
+//     OnDestroy,
+//     OnInit,
+//     Output,
+//     Renderer2,
+//     SimpleChanges,
+//     ViewChild,
+// } from "@angular/core";
+// import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+// import { MatDialog } from "@angular/material/dialog";
+// import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+// import { PROPERTY_DASHBOARD } from "@app/constant/routes";
+// import { Subscription } from "rxjs";
+// import { BOOKING_TYPE_CONST, WEEKDAYS } from "src/app/constant/app-constant";
+// import { BOOKING_TYPE, SHARE_INFORMATION_STATUS } from "src/app/constant/enums";
+// import { InputChanges } from "src/app/decorators/onchanges.decorator";
+// import { OfferPopupComponent } from "src/app/modules/common/modules/offer-popup/offer-popup.component";
+// import { CustomCurrencyPipe } from "src/app/pipes/custom-currency-pipe/custom-currency.pipe";
+// import { CustomDatePipe } from "src/app/pipes/custom-date/custom-date.pipe";
+// import { TranslatePipe } from "src/app/pipes/translate/translate.pipe";
+// import { FormService } from "src/app/services/form.service";
+// import { IloqService } from "src/app/services/iloq.service";
+// import { TranslateService } from "src/app/services/translate.service";
+// import { UserProfileService } from "src/app/services/user-profile.service";
+// import { UtilityService } from "../../../../../../services/utility.service";
+// import { PropertyService } from "../../../service/property.service";
+// import { FacilityPopupComponent } from "../facility-popup/facility-popup.component";
+// import { SpaceDetailComponent } from "./space-detail/space-detail.component";
+
+// // Floorplan start
+// import * as L from "leaflet";
+
+// // Floorplan end
+
+// declare var d3;
+
+// @Component({
+//   selector: "app-property-category",
+//   templateUrl: "./property-category.component.html",
+//   styleUrls: ["./property-category.component.scss"],
+// })
+// //  AfterViewInit,
+// export class PropertyCategoryComponent implements OnInit, OnDestroy {
+//   selectedSpace;
+//   reservedBlocksData: any[] = [];
+//   breakLoop = false;
+//   categoryArray: any[] = [];
+//   lowestFound = false;
+//   @InputChanges(function (newValue) {})
+//   @Input()
+//   propertyDetail: any;
+//   subCategoryForm: FormGroup;
+//   @Input() bookingTypeSelected;
+//   bookingTypes = BOOKING_TYPE_CONST;
+//   bookingType = BOOKING_TYPE;
+//   sqwr;
+//   column;
+//   selectedGrid;
+//   zoom_handler;
+//   d;
+//   spaceForm: FormGroup;
+//   // public isShowAllSpaces: boolean = true;
+//   imgSelected = false;
+//   floorNumber;
+//   selectedTab;
+//   @ViewChild("formElement") formElement: ElementRef;
+//   @ViewChild("grid") gridElementRef: ElementRef;
+//   selecteTabSubtabInfo;
+//   isFirstTimeLoading = true;
+//   spacesSelectedArray = [];
+//   @Input()
+//   totalFloorsArray = [];
+//   spacesSelectedArrayCopy = [];
+//   spaceBeforeReset;
+//   isOfferPriceVisible: boolean = false;
+//   offerPriceList = [];
+//   floorPlanImage;
+//   combinedGridPlans = [];
+//   floorView = true;
+//   floorViewAvaliable = true;
+//   gridSpaceList = [];
+//   onlyCategory = [];
+//   // public defaultToggleElementDiv: MatSlideToggleChange;
+//   public isToggleActive: boolean = true;
+//   public isFloorChange: boolean = false;
+//   public istabClick: boolean = false;
+//   shareInformationStatus = SHARE_INFORMATION_STATUS;
+//   gridSize: number = 30;
+//   @Input()
+//   userDetail: any;
+//   @Input()
+//   public sessionTTL: any = "";
+//   isIloqActive: boolean;
+//   newFloorplanData: any;
+//   // new Floorplan start
+//   newfloorView: boolean = false;
+
+//   @ViewChild("mapContainer", { static: true }) mapContainer!: ElementRef;
+//   // new Floorplan end
+
+//   @Input()
+//   set selectedFloor(data) {
+//     this.floorNumber = data;
+//     if (typeof data === "number" && data >= -1) {
+//       this.isFloorChange = true;
+//       this.floorControl.setValue(data);
+//     }
+//   }
+
+//   @Input()
+//   set categoryData(data) {
+//     if (data.length === 0) {
+//       if (!this.isFirstTimeLoading) {
+//         location.reload();
+//       }
+//     }
+//     if (data && data.length) {
+//       this.newFloorplan(data);
+//       this.newFloorplanData = data;
+//       //reset previous values only when site loads for the first time or if its a new floor change
+//       if (this.isFirstTimeLoading || this.isFloorChange) {
+//         // take the backup which can be used to assign back this value to this.spacesSelectedArray if its only floor change
+//         this.spacesSelectedArrayCopy = JSON.parse(
+//           JSON.stringify(this.spacesSelectedArray)
+//         );
+//         this.resetGrid(true);
+//         this.gridSize = data[0].gridSize || 30;
+//         this.selectedTab = null;
+//         this.selecteTabSubtabInfo = null;
+//         // assign the backup back if its only floor change
+//         if (this.isFloorChange) {
+//           this.spacesSelectedArray = JSON.parse(
+//             JSON.stringify(this.spacesSelectedArrayCopy)
+//           );
+//         }
+//       }
+//       this.categoryArray = data;
+
+//       //group floor plan according to sub category
+//       for (let i = 0; i < this.categoryArray.length; i++) {
+//         const floorPlan = [];
+//         const groupedSubcategory = this.propertyService.groupBySubCategory(
+//           this.categoryArray[i].categoryDetail
+//         );
+//         for (let j in groupedSubcategory) {
+//           let { categoryData, subCategory, offerPricing } =
+//             groupedSubcategory[j][0];
+//           floorPlan.push({
+//             categoryData,
+//             subCategory,
+//             gridPlan: groupedSubcategory[j],
+//             offerPricing,
+//           });
+//         }
+//         this.categoryArray[i].floorPlan = floorPlan;
+//       }
+
+//       this.floorViewChangeAvailability(data);
+
+//       //show all spaces only when site loads for the first time or if its a new floor change
+//       if (this.isFirstTimeLoading || this.isFloorChange) {
+//         this.showAllSpaces();
+//       }
+//       this.floorPlanImage = this.categoryArray[0].floorImage;
+//       this.gridSize = this.categoryArray[0].gridSize || 30;
+//       this.lowestFound = false;
+//       if (this.selectedSpace && this.selectedSpace.floorId) {
+//         data.forEach((category, parentIndex) => {
+//           category.categoryDetail.forEach((subCat, index) => {
+//             if (
+//               this.selectedSpace &&
+//               this.selectedSpace.floorId === subCat.floorId
+//             ) {
+//               // this.selectSpace(subCat);
+//               this.lowestFound = true;
+//             }
+//           });
+//         });
+//       }
+
+//       this.gridSpaceList = [];
+//       this.onlyCategory = [];
+//       data.forEach((category) => {
+//         this.onlyCategory.push({ ...category?.floorPlan[0]?.categoryData });
+
+//         category.categoryDetail.forEach((space) => {
+//           this.gridSpaceList.push(space);
+//         });
+//       });
+//     }
+//     this.isFloorChange = false;
+//     this.istabClick = false;
+//   }
+
+//   @Output() emitSpace = new EventEmitter();
+//   @Output() selectFloor = new EventEmitter();
+//   @Output() bookNow = new EventEmitter();
+//   @Output() updateCat = new EventEmitter();
+
+//   floorControl = new FormControl();
+//   floorPlan = [];
+//   private floorSubscription: Subscription;
+
+//   weekdays = WEEKDAYS;
+//   businessHours = [];
+
+//   /**
+//    * Creates an instance of property category component.
+//    * @param dialog instance of MatDialog
+//    * @param formBuilder
+//    * @param formService
+//    * @param customCurrency
+//    * @param renderer
+//    * @param utilityService instance of UtilityService
+//    * @param propertyService instance of PropertyService
+//    * @param iloqService
+//    */
+//   constructor(
+//     public dialog: MatDialog,
+//     private propertyService: PropertyService,
+//     private profileService: UserProfileService,
+//     private formBuilder: FormBuilder,
+//     private formService: FormService,
+//     private customCurrency: CustomCurrencyPipe,
+//     private renderer: Renderer2,
+//     private translatePipe: TranslatePipe,
+//     private utilityService: UtilityService,
+//     private customDatePipe: CustomDatePipe,
+//     private iloqService: IloqService,
+//     private router: Router,
+//     private activatedRoute: ActivatedRoute
+//   ) {
+//     // this.createForm();
+//     this.floorSubscription = this.utilityService.floorNumber.subscribe(
+//       (item) => {
+//         if (typeof item === "number" && item >= -1) {
+//           this.isFloorChange = true;
+//           this.floorControl.setValue(item);
+//         }
+//       }
+//     );
+//   }
+
+//   /**
+//    * Opens offerpopup
+//    * @param [offers] offer data
+//    */
+//   openOfferpopup(): void {
+//     const dialogRef = this.dialog.open(OfferPopupComponent, {
+//       width: "500px",
+//       data: this.offerPriceList,
+//     });
+//   }
+
+//   showAllSpaces() {
+//     /* reset all selected tabs and falsify the tab index given by lowestFound */
+//     this.selecteTabSubtabInfo = null;
+//     this.lowestFound = false;
+//     //
+//     this.combinedGridPlans = [];
+//     this.resetGrid(true);
+//     for (let i = 0; i < this.categoryArray.length; i++) {
+//       this.categoryArray[i]?.floorPlan.map((item) => {
+//         this.combinedGridPlans.push(...item.gridPlan);
+//       });
+//     }
+//     this.floorPlan = [...this.combinedGridPlans];
+//     this.drawGrid(null, this.floorPlan);
+//     setTimeout(() => {
+//       //remove all previous nodes
+//       Array.from(this.gridElementRef.nativeElement.children).forEach(
+//         (child: Element) => {
+//           if (
+//             /top_.*/.test(child.id) ||
+//             /middle_.*/.test(child.id) ||
+//             /bottom_.*/.test(child.id)
+//           ) {
+//             this.renderer.removeChild(this.gridElementRef.nativeElement, child);
+//           }
+//         }
+//       );
+//       for (let i = 1; i <= 3; i++) {
+//         const element = this.createTopElement(
+//           i,
+//           this.propertyDetail.floorCorners
+//         );
+//         this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//       }
+//       for (let i = 1; i <= 3; i++) {
+//         const element = this.createBottomElement(
+//           i,
+//           this.propertyDetail.floorCorners
+//         );
+//         this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//       }
+//       for (let i = 1; i <= 2; i++) {
+//         const element = this.createMiddleElement(
+//           i,
+//           this.propertyDetail.floorCorners
+//         );
+//         this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//       }
+//       this.showEarlierSavedSpaces(this.categoryArray);
+//     }, 0);
+//   }
+
+//   showEarlierSavedSpaces(data: any) {
+//     /* pre-populate the grid with previously selected spaces */
+//     if (data && data.length > 0) {
+//       data.map((cat, parentIndex) => {
+//         cat.categoryDetail.map((subCat, index) => {
+//           for (let i = 0; i < this.reservedBlocksData.length; i++) {
+//             // found the match to the empty not selected block
+//             if (
+//               subCat.isSelected &&
+//               subCat.gridRow === this.reservedBlocksData[i]?.data.row &&
+//               subCat.gridColumn === this.reservedBlocksData[i]?.data.column
+//             ) {
+//               this.selectedGrid = this.reservedBlocksData[i]?.gridElem;
+//               let obj = {};
+//               obj["formdata"] = { ...subCat };
+//               this.activateSelectionOnFirstLoad(obj);
+//             }
+//           }
+//         });
+//       });
+//     }
+//     this.reservedBlocksData = [];
+//   }
+
+//   createSubCategoryForm() {
+//     this.subCategoryForm = this.formBuilder.group({
+//       description: this.formService.getControl("description"),
+//       iconImage: this.formService.getControl("dropdown"),
+//       name: this.formService.getControl("dropdown"),
+//       parentId: this.formService.getControl("dropdown"),
+//       _id: this.formService.getControl("dropdown"),
+//     });
+//   }
+
+//   selectSubcategory(event) {
+//     this.createSubCategoryForm();
+//     this.subCategoryForm.patchValue(event);
+//   }
+
+//   openFacilityPopup(subCat): void {
+//     const dialogRef = this.dialog.open(FacilityPopupComponent, {
+//       width: "400px",
+//       panelClass: "facility_popup",
+//       data: {
+//         ...subCat,
+//         isPartnerProperty: this.propertyDetail?.isPartnerProperty,
+//       },
+//     });
+//   }
+
+//   floorChange() {
+//     this.isToggleActive = true;
+//     this.selectFloor.emit(this.floorControl.value);
+//   }
+
+//   getUpdatedCategories() {
+//     this.updateCat.emit();
+//   }
+
+//   floorViewChangeAvailability(data) {
+//     // this.floorView = true;
+//     this.floorViewAvaliable = true;
+
+//     data.forEach((category) => {
+//       category.categoryDetail.forEach((space) => {
+//         if (
+//           !space.position ||
+//           space.position === undefined ||
+//           space?.gridColumn == null ||
+//           space?.gridRow == null
+//         ) {
+//           this.floorView = false;
+//           this.floorViewAvaliable = false;
+//         }
+//       });
+//       if (data[0]?.categoryDetail?.[0].newFloorplan?.floorImage) {
+//         this.floorViewAvaliable = true;
+//         this.isNewFloorplanAvailable = true;
+//       }
+//     });
+//   }
+
+//   /**
+//    * on init life cycle hook
+//    */
+//   ngOnInit(): void {
+//     // const mapContainerId = this.map._container.id;
+//     // const mapContainerElement = document.getElementById(mapContainerId);
+//     // mapContainerElement.style.display = "none";
+//   }
+
+//   // ngAfterViewInit() {}
+
+//   ngOnChanges(changes: SimpleChanges) {
+//     if (changes.propertyDetail && !changes.propertyDetail.firstChange) {
+//       if (this.propertyDetail?.businessHours?.length) {
+//         this.businessHours = [];
+//         this.weekdays.forEach((weekday) => {
+//           const day = this.propertyDetail?.businessHours?.find(
+//             (d) => d.dayId === weekday.noValue
+//           );
+
+//           if (day) {
+//             this.businessHours.push({
+//               dayId: day.dayId,
+//               name: day.name,
+//               startTime: day.startTime,
+//               endTime: day.endTime,
+//               available: true,
+//             });
+//           } else {
+//             this.businessHours.push({
+//               dayId: weekday.noValue,
+//               name: weekday.viewValue.toUpperCase(),
+//               available: false,
+//             });
+//           }
+//         });
+//       }
+//     }
+//   }
+
+//   /**
+//    * Selects space
+//    * @param event space data
+//    */
+//   async selectSpace(event) {
+//     this.floorPlan = [];
+//     this.categoryArray[this.selectedTab].floorPlan.forEach((item) => {
+//       if (item.subCategory._id == event.subCategory._id) {
+//         this.floorPlan = [...item.gridPlan];
+//       }
+//     });
+//     this.resetGrid();
+//     this.drawGrid(null, this.floorPlan);
+//     this.selectedSpace = { ...event };
+//     // this.emitSpace.emit(event);
+//   }
+
+//   async selectSpaceList(event) {
+//     this.spacesSelectedArray.push(event);
+//     this.selectSpaceforBooking();
+//   }
+
+//   changeView() {
+//     if (this.floorViewAvaliable) {
+//       this.floorView = !this.floorView;
+//       if (this.floorView) {
+//         setTimeout(() => {
+//           this.isToggleActive = true;
+//           this.showAllSpaces();
+//         }, 0);
+//       }
+//     } else if (this.isNewFloorplanAvailable) {
+//       this.floorView = !this.floorView;
+//     } else {
+//       this.floorView = false;
+//     }
+//   }
+
+//   esToolTipMessage(extraServices) {
+//     let esDesign = "";
+//     for (let es of extraServices) {
+//       esDesign += `${es.name}, `;
+//     }
+//     return esDesign;
+//   }
+
+//   async deSelectSpaceList(event) {
+//     const spaceDeselectBody = {
+//       spaceId: event?.spaceId,
+//     };
+
+//     try {
+//       const resp = await this.propertyService
+//         .removeSpaceSelection(spaceDeselectBody)
+//         .toPromise();
+//       if (resp.statusCode === 200) {
+//         this.spacesSelectedArray = this.spacesSelectedArray.filter(
+//           (item) => item?.spaceId !== spaceDeselectBody?.spaceId
+//         );
+//         this.selectSpaceforBooking();
+//         this.updateCat.emit();
+//       }
+//     } catch (error) {
+//       console.error(
+//         "toggleSelection() - Error! Cannot save deselect space status in database.",
+//         error
+//       );
+//     }
+//   }
+
+//   async drawGrid(data = null, floorPlan = null) {
+//     var that = this;
+//     let gridData;
+//     // console.log('waoaoao',floorPlan)
+//     if (floorPlan && floorPlan.length) {
+//       gridData = this.gridData(true);
+//     } else {
+//       gridData = this.gridData();
+//     }
+//     let counter = 0;
+
+//     const grid = d3
+//       .select("#grid")
+//       .append("svg")
+//       .attr("id", "svgImage")
+//       .attr("width", "100%")
+//       .attr("height", "100%");
+//     // .attr("viewBox", "0 0 500 500");
+//     const toolTip = d3
+//       .select("#grid")
+//       .append("div")
+//       .attr("class", "floor_tooltip")
+//       .style("position", "absolute")
+//       .style("visibility", "hidden")
+//       // .style("background-color", "rgb(136, 132, 132)")
+//       .style("border-width", "1px")
+//       .style("border-radius", "5px")
+//       .style("padding", "10px")
+//       .style("width", "fit-content");
+//     const row = grid
+//       .selectAll(".row")
+//       .data(gridData)
+//       .enter()
+//       .append("g")
+//       .attr("class", "row")
+//       .attr("id", function (d) {
+//         counter++;
+//         return counter;
+//       });
+
+//     this.sqwr = row
+//       .selectAll(".square")
+//       .data(function (d) {
+//         return d;
+//       })
+//       .enter();
+//     this.column = this.sqwr
+//       .append("rect")
+//       .attr("class", function (d, i) {
+//         return "row-" + d.data.row + `col- ${i}`;
+//       })
+//       .attr("id", function (d, i) {
+//         return "s-" + d.data.row + `- ${i}`;
+//       })
+//       .attr("x", function (d) {
+//         return d.x;
+//       })
+//       .attr("y", function (d) {
+//         return d.y;
+//       })
+//       .attr("width", function (d) {
+//         return d.width;
+//       })
+//       .attr("height", function (d) {
+//         return d.height;
+//       })
+//       .attr("pos", function (d) {
+//         return d.pos;
+//       })
+//       .attr("row", function (d, i) {
+//         return d.data.row;
+//       })
+//       .attr("column", function (d, i) {
+//         return i;
+//       })
+//       .attr("rx", function (d) {
+//         return "50";
+//       })
+//       .attr("ry", function (d) {
+//         return "50";
+//       })
+//       .attr("margin", function (d) {
+//         return "8";
+//       })
+//       .attr("data", function (d) {
+//         that.d = d;
+//         if (d.data.formdata) {
+//           if (d.data.formdata.isSelected) {
+//             d3.select(this).style("fill", "#38c68b");
+//           } else if (d.data.formdata.isAvailable) {
+//             d3.select(this).style("fill", "#fff").style("stroke", "#fff");
+//           } else {
+//             d3.select(this).style("fill", "#e05151").style("stroke", "#ED6446");
+//           }
+//         } else {
+//           d3.select(this).style("fill", "transparent");
+//         }
+//         return d.data;
+//       })
+//       .attr("selected", function (d) {
+//         return d.selected;
+//       })
+//       .on("click", spaceClick);
+//     const enterSelection = row
+//       .selectAll(".square")
+//       .data(function (d) {
+//         return d;
+//       })
+//       .enter();
+//     enterSelection
+//       .append("svg:image")
+//       .attr("class", "point")
+//       .attr("class", "display-none")
+//       .attr("x", function (d) {
+//         return d.x;
+//       })
+//       .attr("y", function (d) {
+//         return d.y;
+//       })
+//       .attr("width", function (d) {
+//         return d.width;
+//       })
+//       .attr("height", function (d) {
+//         return d.height;
+//       })
+//       // .attr("transform", function(d){
+//       // const rect = document.querySelector('[pos="' + d.x + "_" + d.y + '"]');
+//       // return "translate(" + d.x + "," + d.y + ")";
+//       // })
+//       .on("mouseover", function (d) {
+//         if (d.data && d.data.formdata) {
+//           toolTip.style("visibility", "visible");
+//           if (d.data && d.data.formdata.isSelected) {
+//             return;
+//           }
+//           d3.select(this)
+//             .style("stroke", "#eee")
+//             .style("visibility", "visible");
+//         }
+//       })
+
+//       .on("mousemove", function (d) {
+//         const bookingType = that.bookingTypes.find(
+//           (type) => type.value == that.bookingTypeSelected
+//         );
+//         const bookingTypePrice = bookingType.transformValue.toLowerCase();
+//         let extraServiceAvailable = "";
+//         let extraServiesName = "";
+//         let description = "";
+//         let descriptionName = "";
+//         let hide = "";
+//         let equipment = "";
+//         let equipmentList = "";
+//         let commonItem = "";
+
+//         let leftPos, topPos;
+
+//         if (d.data && d.data.formdata) {
+//           const tooltipWidth = 250;
+//           const tooltipHeight = 100;
+//           const pointerX = d3.mouse(this)[0];
+//           const pointerY = d3.mouse(this)[1];
+//           const windowWidth = window.innerWidth;
+//           const windowHeight = window.innerHeight;
+//           let offset = 70;
+
+//           // Check if the tooltip will overflow on the right side
+//           if (pointerX + tooltipWidth + offset > 900) {
+//             leftPos = pointerX - tooltipWidth - offset;
+//           } else {
+//             leftPos = pointerX + offset;
+//           }
+
+//           // Check if the tooltip will overflow at the bottom
+//           if (pointerY + tooltipHeight > windowHeight) {
+//             topPos = windowHeight - tooltipHeight - 20; // Move it up slightly to avoid getting cut off
+//           } else {
+//             topPos = pointerY;
+//           }
+
+//           // add equipment to show box for space
+//           if (d.data.formdata?.equipment?.length > 0) {
+//             equipment =
+//               d.data.formdata.equipment && d.data.formdata.equipment.length > 0
+//                 ? `${that.translatePipe.transform("EQUIPMENT")} <br/>`
+//                 : "";
+
+//             d.data.formdata.equipment.forEach(function (item) {
+//               equipmentList += `<li> ${item?.device_type} (${item?.device_group})</li> `;
+//             });
+//           }
+
+//           if (bookingType.viewValue.toLowerCase() != "monthly") {
+//             extraServiceAvailable =
+//               d.data.formdata.extraServices &&
+//               d.data.formdata.extraServices.length > 0
+//                 ? `<br/>${that.translatePipe.transform("EXTRA_SERVICE")} <br/>`
+//                 : "";
+
+//             const distinctCategories = d.data.formdata?.extraServices?.reduce(
+//               (uniqueCategories, item) => {
+//                 const category = item.category;
+//                 const existingCategory = uniqueCategories.find(
+//                   (c) => c?._id === category?._id || c === category
+//                 );
+//                 if (!existingCategory) {
+//                   uniqueCategories.push(category);
+//                 }
+//                 return uniqueCategories;
+//               },
+//               []
+//             );
+
+//             distinctCategories.forEach(function (item) {
+//               extraServiesName += `<li style="display: flex; margin-top: 5px; justify-content: flex-start; gap: 10px; align-items: center;">
+//                 <img style="width: 24px; height: 24px; border-radius: 12px;object-fit: cover;" src="${
+//                   item?.icon_image
+//                 }" alt="">
+//                 <span>${item?.name || item}</span>
+//               </li>`;
+//             });
+//           }
+
+//           if (d.data.formdata?.description) {
+//             description = `<br/>${that.translatePipe.transform(
+//               "DESCRIPTION"
+//             )}<br/>`;
+//             descriptionName = d.data.formdata?.description;
+//           }
+
+//           commonItem = `<div class="heading">
+//             <h3>${d.data.formdata.spaceLabel}</h3>
+//           </div>
+//           <div class="content-wrapper">
+//             <div class="flex_start">   <p class="people "> <img src="../../../../../../../../assets/images/space_people.svg" type="image/svg+xml" />${
+//               d.data.formdata.capacity
+//             } ${that.translatePipe.transform("PEOPLE")} </p>         ${
+//             d.data.formdata.iloqAccessRights &&
+//             that.propertyDetail.isIloqEnabled &&
+//             Object.keys(d.data.formdata.iloqAccessRights).length > 0
+//               ? `<p class="iloq"> iLOQ  ${that.translatePipe.transform(
+//                   "AVAILABLE"
+//                 )} </p>`
+//               : ""
+//           } </div>
+//           <div><span class="title">${equipment}</span> <ul class="sub_title">${equipmentList}</ul></div>
+//           <div><span class="title">${extraServiceAvailable}</span> <ul class="sub_title">${extraServiesName}</ul></div>
+//           <div><span class="title">${description}</span> <ul class="sub_title">${descriptionName}</ul></div>
+
+//           </div>`;
+//         }
+
+//         if (d.data && d.data.formdata && d.data.formdata.isAvailable) {
+//           // Set the tooltip position and content
+//           toolTip
+//             .html(
+//               `
+//                 <div style="width: 200px;">
+//                   <div class="page_main_wrapper">
+//                     ${commonItem}
+//                     <div class="btn_wrap">
+//                       <span class="available">${that.translatePipe.transform(
+//                         "THIS_SPACE_IS_AVAILABLE"
+//                       )}</span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               `
+//             )
+//             .style("left", leftPos + "px")
+//             .style("top", topPos + "px");
+//         }
+
+//         if (
+//           d.data &&
+//           d.data.formdata &&
+//           d.data.formdata.isEmployee &&
+//           !d.data.formdata.isAvailable
+//         ) {
+//           let userInfo = "";
+//           let userImage = "";
+
+//           const bookingDate = `${that.customDatePipe.transform(
+//             d.data.formdata?.bookedSlots?.[0]?.fromDate,
+//             "d MMM y H:mm"
+//           )} -
+//               ${that.customDatePipe.transform(
+//                 d.data.formdata?.bookedSlots?.[0]?.toDate,
+//                 "H:mm"
+//               )}`;
+
+//           if (
+//             d.data.formdata.bookedSlots[0]?.userData
+//               ?.shareInformationEnabled === that.shareInformationStatus.ENABLE
+//           ) {
+//             userImage =
+//               "<img class='popup_img' style='height: 30px;width: 30px;border-radius: 100%;object-fit: cover;margin-right: 7px;' src=" +
+//               d.data.formdata.bookedSlots[0]?.userData?.image +
+//               " />";
+
+//             userInfo =
+//               d.data.formdata.bookedSlots.length &&
+//               d.data.formdata.bookedSlots[0]?.userData?.name;
+//           }
+
+//           toolTip
+//             .html(
+//               `
+//             <div style="width: 200px;">
+//             <div class="page_main_wrapper">
+//               ${commonItem}
+//               <hr style="margin-top: 10px; margin-bottom: 10px;"/>
+//               <div class="booked_info">
+//                 ${userImage} 
+//                 <div class="user_info">
+//                   <span class="booked_user">${userInfo}</span>
+//                   <span class="booking_date">${bookingDate}</span>
+//                 </div>
+//               </div>
+//             </div>
+//            </div>
+
+//             `
+//             )
+//             .style("left", leftPos + "px")
+//             .style("top", topPos + "px");
+//         }
+//       })
+//       .on("mouseleave", function (d) {
+//         if (d.data && d.data.formdata) {
+//           toolTip.style("visibility", "hidden");
+//           if (d.data && d.data.formdata.isSelected) {
+//             return;
+//           }
+//           d3.select(this)
+//             .style("fill", "#fff")
+//             .style("stroke", "#38c68b")
+//             .style("stroke-width", "4px")
+//             .style("clip-path", "inset(0% round 15px)");
+//         }
+//       })
+//       .attr("xlink:href", function (d) {
+//         if (d.data && d.data.formdata && d.data.formdata.isAvailable) {
+//           // console.log('cocococo')
+//           d3.select(this).attr("class", "display-block");
+//           let dataObj = {};
+//           dataObj["gridElem"] = this;
+//           dataObj["data"] = d.data;
+//           that.reservedBlocksData.push({ ...dataObj });
+//           return "assets/images/Symbol.svg";
+//         }
+
+//         if (
+//           d.data &&
+//           d.data.formdata &&
+//           d.data.formdata.isEmployee &&
+//           !d.data.formdata.isAvailable
+//         ) {
+//           d3.select(this).attr("class", "display-block");
+//           d3.select(this).style("clip-path", "inset(0% round 15px)");
+//           let dataObj = {};
+//           dataObj["gridElem"] = this;
+//           dataObj["data"] = d.data;
+//           that.reservedBlocksData.push({ ...dataObj });
+//           return d.data.formdata.bookedSlots[0]?.userData
+//             ?.shareInformationEnabled
+//             ? d.data.formdata.bookedSlots.length &&
+//                 d.data.formdata.bookedSlots[0]?.userData?.image
+//             : null;
+//         }
+//       })
+//       .on("error", function (d) {
+//         // specify a default path for the image
+//         d3.select(this).attr(
+//           "xlink:href",
+//           "assets/images/dummy_profile_pic.png"
+//         );
+//       })
+//       .on("click", spaceClick);
+//     let ig;
+//     async function spaceClick(d) {
+//       that.isIloqActive = await that.profileService.getIloq();
+//       /* check if iloq is enabled for this seat. If yes then check if sessionId is still valid,
+//         and if this is yes then only enable book now or throw sessionId expiry error.
+//       */
+//       if (
+//         that.isIloqActive &&
+//         that.propertyDetail.isIloqEnabled &&
+//         d.data.formdata.iloqAccessRights &&
+//         Object.keys(d.data.formdata.iloqAccessRights).length > 0
+//       ) {
+//         let resp = await that.iloqService.getSessionIdStatus(
+//           that.userDetail.email
+//         );
+//         if (resp.statusCode === 200) {
+//           if (resp.data[0] === null) {
+//             await that.iloqService.resetSessionIdParams(that.userDetail.email);
+//             this.sessionId = "";
+//             that.sessionTTL = "";
+//             that.utilityService.customErrorDialog(
+//               TranslateService.data.ISILOQ_ACTIVE
+//             );
+//             return;
+//           }
+//         }
+//       }
+//       /**/
+//       that.d = d;
+//       //removed old stroke highlighted
+//       that.selectedGrid = this;
+//       if (d.data.formdata && !d.data.formdata.isAvailable) {
+//         return;
+//       }
+//       that.toggleSelection(that.d.data);
+//     }
+//   }
+
+//   activateSelectionOnFirstLoad(data: any) {
+//     let that = this;
+//     if (data && data.formdata) {
+//       const rectGrid = `rect[x='${data.formdata.position.x}'][y='${data.formdata.position.y}']  rx="50"`;
+//       d3.select(this.selectedGrid).attr("data", async function (d) {
+//         that.spacesSelectedArray.push(data.formdata);
+//         that.selectSpaceforBooking();
+//         d3.select(rectGrid).style("fill", "#38c68b");
+//       });
+//     }
+//   }
+
+//   activateSelectionOnTabClick(data: any) {
+//     for (let i = 0; i < data.length; i++) {
+//       if (data[i].isSelected) {
+//         const rectGrid = `rect[x='${data[i].position.x}'][y='${data[i].position.y}'] rx="50"`;
+//         d3.select(this.selectedGrid).attr("data", async function (d) {
+//           d3.select(rectGrid).style("fill", "#38c68b");
+//         });
+//       }
+//     }
+//   }
+//   toggleSelection(data: any) {
+//     const spaceDeselectBody = {
+//       spaceId: "",
+//     };
+//     if (data && data.formdata) {
+//       const rectGrid = `rect[x='${data.formdata.position.x}'][y='${data.formdata.position.y}']`;
+//       let that = this;
+//       d3.select(this.selectedGrid).attr("data", async function (d) {
+//         const oldData = { ...d };
+
+//         const oldFormData = oldData.data.formdata;
+//         const oldSelection = oldFormData.isSelected;
+//         //means earlier grid was selected and we need to undo the data by removing the selection
+//         if (oldSelection) {
+//           const index = that.spacesSelectedArray.findIndex(
+//             (items) => items.spaceId === oldFormData.spaceId
+//           );
+//           spaceDeselectBody.spaceId = that.spacesSelectedArray[index]?.spaceId;
+
+//           that.spacesSelectedArray.splice(index, 1);
+//           try {
+//             const resp = await that.propertyService
+//               .removeSpaceSelection(spaceDeselectBody)
+//               .toPromise();
+//             if (resp.statusCode === 200) {
+//               that.updateCat.emit();
+//             }
+//           } catch (error) {
+//             console.error(
+//               "toggleSelection() - Error! Cannot save deselect space status in database.",
+//               error
+//             );
+//           }
+//           d3.select(rectGrid).style("fill", "#fff");
+//         } else {
+//           that.spacesSelectedArray.push(oldFormData);
+//           d3.select(rectGrid).style("fill", "#38c68b");
+//         }
+//         oldData.data.formdata.isSelected = !oldSelection;
+//         return { ...oldData };
+//       });
+//       this.selectSpaceforBooking();
+//     }
+//   }
+
+//   gridData(isPatch = false) {
+//     var data = new Array();
+
+//     var square = this.gridSize,
+//       xpos = 1, //starting xpos and ypos at 1 so the stroke will show when we make the grid below
+//       ypos = 1,
+//       w = 1260,
+//       h = 880;
+//     var click = 0;
+
+//     // calculate number of rows and columns
+//     var squaresRow = Math.floor(w / square);
+//     var squaresColumn = Math.floor(h / square);
+
+//     // iterate for rows
+//     for (var row = 0; row < squaresColumn; row++) {
+//       data.push(new Array());
+//       // iterate for cells/columns inside rows
+//       for (var column = 0; column < squaresRow; column++) {
+//         let gridData;
+//         if (isPatch) {
+//           const findExisting = this.floorPlan.find(
+//             (items) => items.gridRow === row && items.gridColumn === column
+//           );
+//           if (findExisting) {
+//             gridData = {
+//               row,
+//               column,
+//               formdata: { ...findExisting },
+//               isSaved: true,
+//             };
+//           } else {
+//             gridData = { row, column };
+//           }
+//         } else {
+//           gridData = { row, column };
+//         }
+//         data[row].push({
+//           x: xpos,
+//           y: ypos,
+//           width: square,
+//           height: square,
+//           click: click,
+//           isSelected: false,
+//           pos: xpos + "" + ypos,
+//           data: gridData,
+//         });
+//         // increment the x position. I.e. move it over by 50 (w variable)
+//         xpos += square;
+//       }
+//       // reset the x position after a row is complete
+//       xpos = 1;
+//       // increment the y position for the next row. Move it down 50 (h variable)
+//       ypos += square;
+//     }
+//     return data;
+//   }
+
+//   tabClick(event, tabClicked = false) {
+//     if (tabClicked) {
+//       this.istabClick = true;
+//     }
+//     if (this.isFirstTimeLoading || !this.istabClick) {
+//       this.isFirstTimeLoading = false;
+//       return;
+//     }
+//     this.selectedTab = event.index;
+//     this.resetGrid(false);
+//     /* when tab is clicked, disable all the features activated by toggle all spaces button */
+//     this.isToggleActive = false;
+//     this.toggleAllSpaces(null);
+//     /**/
+//     this.floorPlan = [...this.categoryArray[this.selectedTab].categoryDetail];
+//     this.offerPriceList = this.categoryArray[this.selectedTab].floorPlan.reduce(
+//       (accum, currentElem) => {
+//         if (currentElem.offerPricing && currentElem.offerPricing.length) {
+//           accum.push({
+//             subCategory: currentElem.subCategory,
+//             offers: currentElem.offerPricing,
+//           });
+//         }
+//         return accum;
+//       },
+//       []
+//     );
+
+//     // if(this.selecteTabSubtabInfo.categoryData && this.categoryArray[this.selectedTab]._id === this.selecteTabSubtabInfo.categoryData._id){
+//     //   this.floorPlan = [...this.categoryArray[this.selectedTab].floorPlan.find(list => list.subCategory._id === this.selecteTabSubtabInfo.subCategory._id).gridPlan];
+//     //   this.offerPriceList = this.categoryArray[this.selectedTab].floorPlan.reduce((accum,currentElem)=>{
+//     //     if(currentElem.offerPricing && currentElem.offerPricing.length){
+//     //       accum.push({
+//     //         subCategory:currentElem.subCategory,
+//     //         offers:currentElem.offerPricing
+//     //       })
+//     //     }
+//     //     return accum
+//     //   },[]);
+//     //   this.floorPlanImage = this.categoryArray[this.selectedTab].floorImage;
+//     // }else{
+//     // }
+//     this.floorPlanImage = this.categoryArray[this.selectedTab].floorImage;
+//     this.gridSize = this.categoryArray[this.selectedTab].gridSize || 30;
+//     this.drawGrid(null, this.floorPlan);
+
+//     setTimeout(() => {
+//       if (this.isFirstTimeLoading) {
+//         //remove all previours nodes
+//         Array.from(this.gridElementRef.nativeElement.children).forEach(
+//           (child: Element) => {
+//             if (
+//               /top_.*/.test(child.id) ||
+//               /middle_.*/.test(child.id) ||
+//               /bottom_.*/.test(child.id)
+//             ) {
+//               this.renderer.removeChild(
+//                 this.gridElementRef.nativeElement,
+//                 child
+//               );
+//             }
+//           }
+//         );
+
+//         for (let i = 1; i <= 3; i++) {
+//           const element = this.createTopElement(
+//             i,
+//             this.propertyDetail.floorCorners
+//           );
+//           this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//         }
+//         for (let i = 1; i <= 3; i++) {
+//           const element = this.createBottomElement(
+//             i,
+//             this.propertyDetail.floorCorners
+//           );
+//           this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//         }
+//         for (let i = 1; i <= 2; i++) {
+//           const element = this.createMiddleElement(
+//             i,
+//             this.propertyDetail.floorCorners
+//           );
+//           this.renderer.appendChild(this.gridElementRef.nativeElement, element);
+//         }
+//       }
+//       this.isFirstTimeLoading = false;
+//     }, 0);
+
+//     const selectedCategory = this.categoryArray[this.selectedTab];
+//     const selectedSubcategory = this.selecteTabSubtabInfo?.subCategory;
+//     console.log(
+//       { selectedCategory, selectedSubcategory },
+//       "selectedCategory 1135"
+//     );
+
+//     this.newFloorplan(this.newFloorplanData);
+//   }
+
+//   subTabClick(subCategory) {
+//     const selectedCategory = this.categoryArray[this.selectedTab];
+//     const selectedSubcategory = this.selecteTabSubtabInfo?.subCategory;
+
+//     if (
+//       this.selecteTabSubtabInfo?.subCategory?._id ===
+//       subCategory?.subCategory?._id
+//     ) {
+//       this.selecteTabSubtabInfo = null;
+//       this.isToggleActive = true;
+//       this.toggleAllSpaces("true");
+//     } else {
+//       this.resetGrid(true);
+//       /* when sub-tab is clicked, disable all the features activated by toggle all spaces button */
+//       this.isToggleActive = false;
+//       this.toggleAllSpaces(null);
+//       this.selecteTabSubtabInfo = null;
+
+//       /**/
+//       this.selecteTabSubtabInfo = {
+//         subCategory: subCategory.subCategory,
+//         categoryData: subCategory.categoryData,
+//       };
+//       this.floorPlan = [...subCategory.gridPlan];
+//       this.drawGrid(null, this.floorPlan);
+//       this.showEarlierSavedSpaces(this.categoryArray);
+//       this.newFloorplan(this.newFloorplanData, true);
+//     }
+//   }
+
+//   selectSubTabGridUpdate() {
+//     this.resetGrid();
+//     this.floorPlan = [
+//       ...this.categoryArray[this.selectedTab].floorPlan.find(
+//         (list) =>
+//           list.subCategory._id === this.selecteTabSubtabInfo.subCategory._id
+//       ).gridPlan,
+//     ];
+//     this.drawGrid(null, this.floorPlan);
+//   }
+
+//   resetGrid(isCompleteReset = false) {
+//     d3.select("svg").remove();
+//     Array.prototype.forEach.call(
+//       document.querySelectorAll(".floor_tooltip"),
+//       (t) => t.parentNode.removeChild(t)
+//     );
+//     if (isCompleteReset) {
+//       this.spacesSelectedArray = [];
+//       this.floorPlan = [];
+//     }
+//     // this.drawGrid()
+//   }
+
+//   selectSpaceforBooking() {
+//     this.emitSpace.emit([...this.spacesSelectedArray]);
+//   }
+
+//   //floor corners
+//   createTopElement(index, floorCorners) {
+//     const divElement = document.createElement("div");
+//     divElement.id = `top_${index}`;
+//     divElement.className = `top_${index}`;
+//     divElement.classList.add("display-none");
+//     // const floorCorners = this.addPropertyService.propertyForm.get('floorCorners').value;
+//     if (floorCorners.length) {
+//       const extistingFloorCorners = floorCorners.find(
+//         (list) => list.floorNumber == this.floorControl.value
+//       );
+//       if (
+//         extistingFloorCorners &&
+//         extistingFloorCorners.cornerLabels &&
+//         extistingFloorCorners.cornerLabels.length
+//       ) {
+//         const currentCornerLabel = extistingFloorCorners.cornerLabels.find(
+//           (list) =>
+//             list.floorKey === `top_${index}` &&
+//             list.floorLabel &&
+//             list.floorLabel.length
+//         );
+//         if (currentCornerLabel) {
+//           divElement.classList.remove("display-none");
+//           this.initlizeCorners(
+//             divElement,
+//             currentCornerLabel.floorLabel,
+//             null,
+//             index
+//           );
+//         }
+//       }
+//     }
+//     return divElement;
+//   }
+
+//   createBottomElement(index, floorCorners) {
+//     const divElement = document.createElement("div");
+//     divElement.className = `bottom_${index}`;
+//     divElement.id = `bottom_${index}`;
+//     divElement.classList.add("display-none");
+//     // const floorCorners = this.addPropertyService.propertyForm.get('floorCorners').value;
+//     if (floorCorners.length) {
+//       const extistingFloorCorners = floorCorners.find(
+//         (list) => list.floorNumber == this.floorControl.value
+//       );
+//       if (
+//         extistingFloorCorners &&
+//         extistingFloorCorners.cornerLabels &&
+//         extistingFloorCorners.cornerLabels.length
+//       ) {
+//         const currentCornerLabel = extistingFloorCorners.cornerLabels.find(
+//           (list) =>
+//             list.floorKey === `bottom_${index}` &&
+//             list.floorLabel &&
+//             list.floorLabel.length
+//         );
+//         if (currentCornerLabel) {
+//           divElement.classList.remove("display-none");
+//           this.initlizeCorners(
+//             divElement,
+//             currentCornerLabel.floorLabel,
+//             null,
+//             index
+//           );
+//         }
+//       }
+//     }
+//     return divElement;
+//   }
+
+//   createMiddleElement(index, floorCorners) {
+//     const divElement = document.createElement("div");
+//     divElement.className = `middle_${index}`;
+//     divElement.id = `middle_${index}`;
+//     divElement.classList.add("display-none");
+//     if (floorCorners.length) {
+//       const extistingFloorCorners = floorCorners.find(
+//         (list) => list.floorNumber == this.floorControl.value
+//       );
+//       if (
+//         extistingFloorCorners &&
+//         extistingFloorCorners.cornerLabels &&
+//         extistingFloorCorners.cornerLabels.length
+//       ) {
+//         const currentCornerLabel = extistingFloorCorners.cornerLabels.find(
+//           (list) =>
+//             list.floorKey === `middle_${index}` &&
+//             list.floorLabel &&
+//             list.floorLabel.length
+//         );
+//         if (currentCornerLabel) {
+//           divElement.classList.remove("display-none");
+//           this.initlizeCorners(
+//             divElement,
+//             currentCornerLabel.floorLabel,
+//             null,
+//             index
+//           );
+//         }
+//       }
+//     }
+//     return divElement;
+//   }
+
+//   initlizeCorners(eventTarget, labelName, $evnt = null, index = null) {
+//     eventTarget.classList.add("text-wrap-label");
+//     const spanElement = document.createElement("span");
+//     spanElement.style.height = "5px";
+//     spanElement.style.width = "5px";
+//     spanElement.style.backgroundColor = "#38c68b";
+//     spanElement.style.margin = "5px";
+//     // const imageElement = document.createElement('img');
+//     // imageElement.src = "../../../../../../../assets/images/ic_edit_mobile_number.svg";
+//     // spanElement.appendChild(imageElement);
+//     this.renderer.appendChild(
+//       $evnt != null ? $evnt.srcElement : eventTarget,
+//       spanElement
+//     );
+//     const labelSpanElement = document.createElement("span");
+//     // labelSpanElement.className = eventTarget.id === 'middle_1' || eventTarget.id === 'middle_2' ? "middle-span" : "label-span"
+//     labelSpanElement.innerText = labelName;
+//     this.renderer.appendChild(
+//       $evnt != null ? $evnt.srcElement : eventTarget,
+//       labelSpanElement
+//     );
+//     const classNameList = eventTarget.className.split(" ");
+//     for (var i = 0, l = classNameList.length; i < l; ++i) {
+//       if (/top_.*/.test(classNameList[i])) {
+//         eventTarget.classList.add(`top_updated_${index}`);
+//       } else if (/middle_.*/.test(classNameList[i])) {
+//         eventTarget.classList.add(`middle_updated_${index}`);
+//       } else if (/bottom_.*/.test(classNameList[i])) {
+//         eventTarget.classList.add(`bottom_updated_${index}`);
+//       }
+//     }
+//   }
+
+//   toggleAllSpaces(event) {
+//     /* only assign event if user manually clicks on toggle button */
+//     if (event !== null) {
+//       this.isToggleActive = event.checked;
+//     }
+//     /* if this.isToggleActive or toggle is false then select first tab by default for the given category */
+//     if (
+//       !this.isToggleActive &&
+//       this.categoryArray &&
+//       this.categoryArray.length > 0
+//     ) {
+//       /* activate first tab by default */
+//       let stop = false;
+//       let loopCounter = 0;
+//       let selectionTab;
+//       for (let detail of this.categoryArray) {
+//         const categoryDetail = detail.categoryDetail;
+//         for (let j of categoryDetail) {
+//           if (j.isLowest) {
+//             this.lowestFound = true;
+//             selectionTab = loopCounter;
+//             this.selecteTabSubtabInfo = { ...j };
+//             stop = true;
+//             break;
+//           }
+//         }
+//         loopCounter++;
+//         if (stop) {
+//           break;
+//         }
+//       }
+//       this.breakLoop = false;
+//       if (!this.lowestFound) {
+//         this.lowestFound = true;
+//         selectionTab = 0;
+//         this.selecteTabSubtabInfo = {
+//           ...this.categoryArray[0].categoryDetail[0],
+//         };
+//       }
+//       if (this.isFirstTimeLoading) {
+//         this.tabClick({ index: 0 });
+//       }
+//       // perform tab-click action even when event exists when user clicks manually on toggle switch to switch it off
+//       else if (event && !event.checked) {
+//         this.tabClick({ index: 0 });
+//       }
+//       // else toggle switch is on
+//     } else {
+//       this.showAllSpaces();
+//     }
+//     const selectedCategory = this.categoryArray[this.selectedTab];
+//     const selectedSubcategory = this.selecteTabSubtabInfo?.subCategory;
+//     console.log(
+//       {
+//         selectedCategory,
+//         selectedSubcategory,
+//       },
+//       "selectedCategory 1428"
+//     );
+//   }
+
+//   getLengthFromObject(object) {
+//     if (object === undefined || object === null) {
+//       return 0;
+//     }
+
+//     return Object.keys(object).length;
+//   }
+
+//   openSpaceDeatils(space): void {
+//     const dialogRef = this.dialog.open(SpaceDetailComponent, {
+//       width: "500px",
+//       data: space,
+//     });
+
+//     dialogRef.afterClosed().subscribe((res) => {
+//       // received data from dialog-component
+
+//       if (res.data) {
+//         this.bookNow.emit();
+//       }
+//     });
+//   }
+//   newView() {
+//     const currentParams = this.activatedRoute.snapshot.queryParams;
+//     console.log(currentParams);
+//     const navigationExtras: NavigationExtras = {
+//       queryParams: currentParams,
+//     };
+//     this.router.navigate(
+//       [PROPERTY_DASHBOARD.fullUrl, this.propertyDetail?._id],
+//       navigationExtras
+//     );
+//   }
+
+//   ngOnDestroy(): void {
+//     this.floorSubscription.unsubscribe();
+//   }
+
+//   tooglevar = true;
+
+//   toogleNewFloorplan() {
+//     this.changeView();
+//     const mapContainerId = "map";
+//     // const mapContainerId = this.map?._container.id;
+//     const mapContainerElement = document.getElementById(mapContainerId);
+//     console.log({
+//       floorView: this.floorView,
+//       mapContainerId,
+//       mapContainerElement,
+//     });
+
+//     if (
+//       !this.floorView
+//       // && !!this.map
+//     ) {
+//       if (mapContainerElement) {
+//         mapContainerElement.style.display = "none";
+//       }
+//       // this.map.remove();
+//     } else {
+//       if (mapContainerElement) {
+//         mapContainerElement.style.display = "block";
+//       }
+//       this.initializeMap(this.newFloorplanData);
+//     }
+//   }
+
+//   // new Floorplan
+//   isNewFloorplanAvailable: boolean = false;
+//   newFloorplanImage = "";
+//   selectedMarker: any;
+//   map: any;
+//   newFloorplan(data: any, subcategory = false) {
+//     const selectedCategory = this.categoryArray[this.selectedTab];
+//     const selectedSubcategory = this.selecteTabSubtabInfo?.subCategory;
+
+//     if (data && data.length > 0) {
+//       if (this.map) {
+//         this.map.remove();
+//       }
+
+//       // if end
+//       let categoryDetail = [];
+//       if (
+//         selectedCategory &&
+//         selectedCategory.categoryDetail &&
+//         selectedCategory.categoryDetail.length > 0
+//       ) {
+//         if (subcategory) {
+//           categoryDetail = selectedCategory.categoryDetail.filter(
+//             (detail) => detail.subCategory._id === selectedSubcategory._id
+//           );
+//         } else {
+//           categoryDetail = selectedCategory.categoryDetail;
+//         }
+//       } else {
+//         categoryDetail = data.map((item) => item.categoryDetail).flat();
+//       }
+//       this.newFloorplanImage = data
+//         .map((item) => item.categoryDetail)
+//         .flat()
+//         .find(
+//           (detail) => detail.newFloorplan?.floorImage
+//         )?.newFloorplan?.floorImage;
+
+//       if (categoryDetail && categoryDetail.length > 0) {
+//         this.isNewFloorplanAvailable = !!data
+//           .map((item) => item.categoryDetail)
+//           .flat()
+//           .find((detail) => detail.newFloorplan?.floorImage);
+//       }
+
+//       this.floorViewAvaliable = !!this.isNewFloorplanAvailable;
+
+//       if (this.isNewFloorplanAvailable) {
+//         this.floorView = true; // Need to work on this why its getting true.
+//         console.log(
+//           "initializeMap initializeMap initializeMap initializeMap initializeMap "
+//         );
+//         this.initializeMap(categoryDetail);
+//         // this.initializeMap(data);
+//       } else {
+//         console.log("map remove line 1554 1554 1554 1554 1554 1554 1554 1554");
+//         const mapContainerElement = document.getElementById("map");
+//         if (mapContainerElement) {
+//           mapContainerElement.style.display = "none";
+//         }
+//       }
+//     }
+//   }
+
+//   htmlTemplateNewFloorplan(space) {
+//     const bookingType = this.bookingTypes.find(
+//       (type) => type.value == this.bookingTypeSelected
+//     );
+//     let extraServiceAvailable = "";
+//     let extraServicesName = "";
+//     let description = "";
+//     let equipment = "";
+//     let equipmentList = "";
+//     let commonItem = "";
+
+//     // Add equipment to show box for space
+//     if (space.equipment && space.equipment.length > 0) {
+//       equipment = `${this.translatePipe.transform("EQUIPMENT")} <br/>`;
+//       space.equipment.forEach(function (item) {
+//         equipmentList += `<li> ${item.device_type} (${item.device_group})</li>`;
+//       });
+//     }
+
+//     // Handle extra services
+//     if (
+//       bookingType.viewValue.toLowerCase() != "monthly" &&
+//       space.extraServices &&
+//       space.extraServices.length > 0
+//     ) {
+//       extraServiceAvailable = `<br/>${this.translatePipe.transform(
+//         "EXTRA_SERVICE"
+//       )} <br/>`;
+
+//       const distinctCategories = space.extraServices.reduce(
+//         (uniqueCategories, item) => {
+//           const category = item.category;
+//           const existingCategory = uniqueCategories.find(
+//             (c) => c?._id === category?._id || c === category
+//           );
+//           if (!existingCategory) {
+//             uniqueCategories.push(category);
+//           }
+//           return uniqueCategories;
+//         },
+//         []
+//       );
+
+//       distinctCategories.forEach(function (item) {
+//         extraServicesName += `<li style="display: flex; margin-top: 5px; justify-content: flex-start; gap: 10px; align-items: center;">
+//           <img style="width: 24px; height: 24px; border-radius: 12px; object-fit: cover;" src="${
+//             item.icon_image
+//           }" alt="">
+//           <span>${item.name || item}</span>
+//         </li>`;
+//       });
+//     }
+
+//     // Description
+//     if (space.description) {
+//       description = `<br/>${this.translatePipe.transform("DESCRIPTION")}<br/>`;
+//       description += space.description;
+//     }
+
+//     commonItem = `<div style="display: flex; align-items: center; justify-content: flex-start; position: relative;">
+//     <h3 style="font-family: 'Lato'; font-style: normal; font-weight: 900; font-size: 20px; line-height: 24px; color: #000000;">
+//     ${space.spaceLabel}
+//   </h3>
+// </div>
+//     <div>
+//       <div 
+//       style="display: flex; align-items: center; justify-content: flex-start;"
+//       >
+//       <p style="font-family: 'Poppins'; font-style: normal; font-weight: 400; font-size: 12px; line-height: 18px; color: #9A9FAC; display: flex; align-items: center;">
+//           <img src="../../../../../../../../assets/images/space_people.svg" type="image/svg+xml" />${
+//             space.capacity
+//           } ${this.translatePipe.transform("PEOPLE")}
+//         </p>
+//         ${
+//           space.iloqAccessRights &&
+//           this.propertyDetail.isIloqEnabled &&
+//           Object.keys(space.iloqAccessRights).length > 0
+//             ? `<p class="iloq"> iLOQ ${this.translatePipe.transform(
+//                 "AVAILABLE"
+//               )} </p>`
+//             : ""
+//         }
+//       </div>
+//       <div><span 
+//       style="font-family: 'Lato'; font-style: normal; font-weight: 900; font-size: 14px; line-height: 17px; color: #A2A2A6;"
+//       class="title">${equipment}</span> <ul class="sub_title">${equipmentList}</ul></div>
+//       <div><span 
+//       style="font-family: 'Lato'; font-style: normal; font-weight: 900; font-size: 14px; line-height: 17px; color: #A2A2A6;"
+//       class="title">${extraServiceAvailable}</span> <ul class="sub_title">${extraServicesName}</ul></div>
+//       <div><span
+//       style="font-family: 'Lato'; font-style: normal; font-weight: 900; font-size: 14px; line-height: 17px; color: #A2A2A6;"
+//        class="title">${description}</span> 
+      
+//        </div>
+//     </div>`;
+
+//     // Check for employee occupation and availability
+//     if (space.isEmployee && !space.isAvailable) {
+//       let userInfo = "";
+//       let userImage = "";
+
+//       const bookingDate = `${this.customDatePipe.transform(
+//         space.bookedSlots[0]?.fromDate,
+//         "d MMM y H:mm"
+//       )} - ${this.customDatePipe.transform(
+//         space.bookedSlots[0]?.toDate,
+//         "H:mm"
+//       )}`;
+
+//       console.log({
+//         enable: this.shareInformationStatus.ENABLE,
+//         real: space.bookedSlots[0]?.userData?.shareInformationEnabled,
+//         check:
+//           space.bookedSlots[0]?.userData?.shareInformationEnabled ===
+//           this.shareInformationStatus.ENABLE,
+//         shareInformationStatus: this.shareInformationStatus,
+//       });
+
+//       if (
+//         space.bookedSlots[0]?.userData?.shareInformationEnabled ===
+//         this.shareInformationStatus.ENABLE
+//       ) {
+//         userImage = `<img style='height: 30px;width: 30px;border-radius: 100%;object-fit: cover;margin-right: 7px;' src="${space.bookedSlots[0]?.userData?.image}" />`;
+//         userInfo = space.bookedSlots[0]?.userData?.name;
+//       }
+
+//       return `<div style="width: 250px; border-radius: 8px; background-color: #fff;">
+//         ${commonItem}
+//         <hr style="margin-top: 10px; margin-bottom: 10px;"/>
+//         <div class="booked_info" style="display: flex; align-items: center;">
+//           ${userImage}
+//           <div style="display: flex; flex-direction: column;">
+//             <span style="font-weight: bold;">${userInfo}</span>
+//             <span>${bookingDate}</span>
+//           </div>
+//         </div>
+//       </div>`;
+//     }
+
+//     const available = space?.isAvailable
+//       ? this.translatePipe.transform("THIS_SPACE_IS_AVAILABLE")
+//       : this.translatePipe.transform("SPACE_CURRENTLY_NOT_AVAILABLE");
+//     // Return available space HTML
+//     return `<div style="width: 250px; border-radius: 8px; background-color: #fff;">
+//       ${commonItem}
+//       <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+//         <span style="color: #20B2AA; padding: 8px; border-radius: 5px;">
+//         ${available}
+//         </span>
+//       </div>
+//     </div>`;
+//   }
+
+//   initializeMap(data: any): void {
+//     console.log("initializeMap", data, "line 1469", this.newFloorplanImage);
+//     const mapElement = this.mapContainer?.nativeElement;
+
+//     this.map = L.map(mapElement).setView([52.396185, 13.3831551], 10); // Create Leaflet map
+
+//     // Add image overlay
+//     L.imageOverlay(this.newFloorplanImage, [
+//       [52.34335, 13.0826], // Bottom left coordinate
+//       [52.68135, 13.78545], // Top right coordinate
+//     ]).addTo(this.map);
+
+//     // data.forEach(({ categoryDetail }) => {
+//     data.forEach(
+//       ({ newFloorplan, spaceLabel, spaceId, isAvailable, isSelected }) => {
+//         let iconUrl = isAvailable
+//           ? "assets/icons/NewFloorplan/green-border-location-icon.svg"
+//           : "assets/icons/NewFloorplan/red-location-icon.svg";
+
+//         iconUrl = isSelected
+//           ? "assets/icons/NewFloorplan/green-location-icon.svg"
+//           : iconUrl;
+
+//         const customIcon = L.icon({
+//           iconUrl,
+//           iconSize: [30, 30],
+//           iconAnchor: [15, 15],
+//         });
+
+//         const marker = L.marker(newFloorplan.axis.latlng, {
+//           icon: customIcon,
+//           draggable: false,
+//         }).addTo(this.map);
+
+//         marker.on("mouseover", () => {
+//           const space = data.find((s) => s.spaceId === spaceId);
+//           console.log({ space }, "space from mouseOver");
+//           const spacePricing = Object.entries(space.pricing).reduce(
+//             (acc: any, [key, value]) => {
+//               if (value !== 0) {
+//                 acc["value"] = value;
+//                 acc.type = key.charAt(0).toUpperCase() + key.slice(1); // Store the type (hourly, daily, weekly) alongside the value
+//               }
+//               return acc;
+//             },
+//             {}
+//           );
+//           // capitalize the first letter of the space name
+//           const spaceName =
+//             space.spaceLabel.charAt(0).toUpperCase() +
+//             space.spaceLabel.slice(1);
+
+//           let userInfo = "";
+//           let userImage = "";
+//           if (
+//             space &&
+//             // && space.isEmployee
+//             !space.isAvailable
+//           ) {
+//             const bookingDate = `${this.customDatePipe.transform(
+//               space?.bookedSlots?.[0]?.fromDate,
+//               "d MMM y H:mm"
+//             )} -
+//                 ${this.customDatePipe.transform(
+//                   space?.bookedSlots?.[0]?.toDate,
+//                   "H:mm"
+//                 )}`;
+
+//             if (
+//               space.bookedSlots[0]?.userData?.shareInformationEnabled ===
+//               this.shareInformationStatus.ENABLE
+//             ) {
+//               userImage =
+//                 "<img class='popup_img' style='height: 30px;width: 30px;border-radius: 100%;object-fit: cover;margin-right: 7px;' src=" +
+//                 space.bookedSlots[0]?.userData?.image +
+//                 " />";
+
+//               userInfo =
+//                 space.bookedSlots.length &&
+//                 space.bookedSlots[0]?.userData?.name;
+//             }
+
+//             const showInformation = space.bookedSlots[0]?.userData
+//               ?.shareInformationEnabled
+//               ? space.bookedSlots.length &&
+//                 space.bookedSlots[0]?.userData?.image
+//               : null;
+//             console.log("userInfo", {
+//               userInfo,
+//               userImage,
+//               bookingDate,
+//               showInformation,
+//             });
+//           }
+
+//           if (space) {
+//             const popupContent = this.htmlTemplateNewFloorplan(space);
+//             marker.bindPopup(popupContent).openPopup();
+//           }
+//         });
+
+//         // On click want to get the space details and marker change color to red
+//         marker.on("click", (event) => {
+//           const clickedSpace = data.find((s) => s.spaceId === spaceId);
+//           console.log({ clickedSpace }, "space from Clicked");
+//           if (clickedSpace && clickedSpace?.isAvailable) {
+//             if (clickedSpace?.isSelected) {
+//               this.deSelectSpaceList(clickedSpace);
+//             } else {
+//               this.selectSpaceList(clickedSpace);
+//             }
+//           }
+//         });
+
+//         // Add mouseout event listener to close the popup when the mouse leaves the marker
+//         marker.on("mouseout", () => {
+//           marker.closePopup();
+//         });
+//       }
+//     );
+
+//     // Initialize Leaflet Draw plugin
+//     const drawnItems = new L.FeatureGroup();
+//     this.map.addLayer(drawnItems);
+//   }
+// }

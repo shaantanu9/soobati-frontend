@@ -8,9 +8,10 @@ import {View} from 'react-native';
 import {
   BuildingStorefrontIcon,
   CalculatorIcon,
+  GlobeAsiaAustraliaIcon,
   HomeIcon,
+  UserGroupIcon,
 } from 'react-native-heroicons/outline';
-import {TravelGlob} from '../../assets/svg';
 import HomeScreen from '../../screens/Common/Home/Home';
 import CommunityHome from '../../screens/CommunityScreen/CommunityScreen';
 import StoreScreen from '../../screens/Ecommerce/StoreScreen/StoreScreen';
@@ -18,7 +19,7 @@ import SelectAddItemScreen from '../../screens/SelectAddItemScreen/SelectAddItem
 import SubscriptionScreen from '../../screens/User/Subscription/SubscriptionScreen';
 import styles from '../../styles';
 import {StackRoute} from '../NavigationRoutes';
-import PulseTabIcon from './PluseTab';
+import TravelForm from '../../screens/CommunityTravel/CommunityTravel';
 
 const Tab = createBottomTabNavigator();
 
@@ -57,7 +58,7 @@ function TabNavigation() {
         }}
       />
       {/* Plus Icon */}
-      <Tab.Screen
+      {/* <Tab.Screen
         name="PlusIcon"
         component={SelectAddItemScreen}
         options={{
@@ -76,7 +77,10 @@ function TabNavigation() {
           tabBarLabel: '',
           headerShown: false,
         }}
-      />
+      /> */}
+
+      {/*  */}
+
       {/* Travel Glob */}
       <Tab.Screen
         name="Swipe"
@@ -87,7 +91,9 @@ function TabNavigation() {
               className={` border-5 w-[30px] font-extrabold h-8 mt-[10px]  ${
                 focused && `bg-white`
               }`}>
-              <TravelGlob color={focused ? styles.darkPrimaryColor : 'black'} />
+              <UserGroupIcon
+                color={focused ? styles.darkPrimaryColor : 'black'}
+              />
             </View>
           ),
 
@@ -95,6 +101,24 @@ function TabNavigation() {
           headerShown: false,
         }}
       />
+
+      {/*  */}
+      <Tab.Screen
+        name="PlusIcon"
+        // component={}
+        component={SelectAddItemScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <GlobeAsiaAustraliaIcon
+              color={focused ? styles.darkPrimaryColor : 'black'}
+              size={24}
+            />
+          ),
+          tabBarLabel: '',
+          headerShown: false,
+        }}
+      />
+
       {/* Subscription Page */}
       <Tab.Screen
         name="SubscriptionScreen"

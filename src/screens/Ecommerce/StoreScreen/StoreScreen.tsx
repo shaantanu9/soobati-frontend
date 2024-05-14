@@ -40,9 +40,9 @@ const StoreScreen = () => {
     );
   }, []);
 
-  useEffect(() => {
-    console.log('products', products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log('products', products);
+  // }, [products]);
   const customSnapOpen = (ref: any, index: number) => {
     ref.current?.snapToIndex(index);
   };

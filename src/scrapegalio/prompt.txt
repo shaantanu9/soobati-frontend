@@ -1,0 +1,385 @@
+Apparel shop and community web app: A homepage for House of 1998 showcasing featured apparels and having sections for community stories with a navigation bar to shop, community page, and profile.
+Landing page for a web3 innovation competition: A landing page for a Web3 innovation competition featuring epic storytelling elements. Integrate Greek statues and classic visuals to convey a sense of history and grandeur, possibly using parallax effects to add depth. The page should include an overview of the competition, submission guidelines, prize information, and a call to action to participate or register.
+House management website for property listings: Design a landing page that includes a hero section and showcases property listings with search and filter options, along with switch toggles for 'To Rent' and 'To Buy' properties.
+Habit tracking mobile app for personal development: A resources screen that provides downloadable content such as e-books, podcasts, or videos to support the user's personal growth, with an attractive and clean interface.
+Website for a company trading in grains and oilseeds in the European Union: Design a single-page website with sections in the following order: 'About Us' with detailed company information and mission; 'Catalog' of grains and oilseeds, including product images; 'Catalog' of cake and meal, similarly with images; 'Delivery and Packaging' detailing delivery methods and packaging options; 'Contact' with a feedback form, email address, and phone numbers. The color scheme should be farm-inspired with green, yellow, and blue colors.
+Mobile app for carbon offsetting through mangrove purchases: Design a checkout cart interface where users can neutralize their flight's CO2 emissions by purchasing mangroves. The interface should indicate the CO2 emissions of the user's flight and suggest the number of mangroves needed for offsetting that amount. Include an interactive element allowing users to adjust the number of mangroves to buy. Also, incorporate a summary of the total cost and a checkout button.
+Education platform with seminar scheduling: Design a calendar page for an education platform, showcasing upcoming seminars available in both online and offline formats. The page should feature a neumorphism design style, with a clear and intuitive layout to display seminars by date. The main feature should be the ability to book tickets directly from this calendar view.
+Portfolio website for an HCI researcher: A homepage for a human-computer interaction research portfolio website. It should feature sections to highlight key research projects with visuals or icons representing each project, an about section detailing the researcher's background and expertise, a process section describing the research methodology, and a contact area with social media links and a form.
+Mobile app for actors to find auditions: A messaging interface for actors to view their inbox with audition-related communications. It should display a list of conversations, each with the casting agent's name, a short snippet of the latest message, and time of last message received. There should also be an option to compose a new message.
+Professional resume bio app: A preview screen for users to review their resume before exporting. The design should be clean and elegant, reflecting a blend of design cues from Apple, LinkedIn, and Bebee.
+Mental wellness app focusing on community and support: Create a welcoming and intuitive home screen for the Vichaaro app with a focus on mental wellness. The design should feature a personalized greeting, display user stats including Unwiring Coins & Deeds Coins, and provide quick action buttons for 'Connect to Professionals/Listeners' and 'Buy Time'. It should also have sections for Popular Queries and Recent Activities, along with a bottom navigation bar for easy access to the app's features. The overall aesthetic should be clean, engaging, and promote a sense of community and support among users.
+Website for an experienced UX designer: Create a sophisticated and professional portfolio website that elegantly showcases a seasoned UX designer's projects, experience, and achievements over 20 years, mainly with Fortune 100 companies. The homepage should feature a brief introduction, a highlighted portfolio section, and a clear navigation to their work history, about page, and contact information.
+Mobile app for music voting: Screen where users can navigate and choose from a curated list of music genres or utilize a search function to find specific genres.
+E-commerce site for natural cosmetic products: A landing page featuring natural cosmetic products with green as the primary brand color. The design should highlight the eco-friendly and organic nature of the products, with emphasis on visual appeal and easy navigation to shop items.
+Cooking app for recipe discovery: Design a 'Quick Recipe Inspiration' screen with two options: 'Ingredient-based Recipe' allows users to type an ingredient and click 'Generate My Recipe' for suggestions; 'Random Recipe Surprise' button provides a random recipe. Include cook time, dietary filters, and an inspiration gallery with images.
+Mental health support app with connectivity functions: Design the home screen for 'Vichaaro' with a focus on three primary actions: Connect to Professionals, Connect to Listeners, and Buy Time. Ensure these actions are emphasized and easily accessible. Additionally, include sections for user stats and recent queries. Integrate a bottom navigation bar with icons for Home, Profile, Messages, Notifications, and Settings for quick access. The overall design should aim for a clean, intuitive, and user-friendly interface.
+Household management app for couples: Create a screen that serves as a dashboard for partners to manage and assign household responsibilities. It should include sections for task lists, assignment of tasks to each partner, and status updates on task completion.
+Mobile app for booking mariachi musicians for private events: This screen features detailed information about a selected mariachi group or musician including biography, photo gallery, available booking dates, user reviews, and contact information. An action button should be available to proceed with booking the act. The navigation should allow users to go back to the home screen or browse similar acts.
+Web app dashboard for running club coaches.: Design a dashboard for a running club management app. Include a user profile in the upper right with the user's name and photo. Add a menu to the left with options for Home, Notifications, New Event, Calendar, Members, Routes, Workouts, Communications, Analytics, Payments, and Finances. Bottom left should have Settings, FAQs, Help, or Log Out. The main content includes widgets for upcoming workouts overview, recent communications, membership growth chart, six club statistics, and four financial metrics. Follow a color theme of white, dark teal, turquoise, and light teal.
+Web app for tracking digital time capsule opening dates: A dramatic and visually engaging screen showing a countdown for a capsule that is nearing its opening date, with details about the capsule and the option to notify recipients if they haven't been alerted yet.
+Expanded landing page for real estate company serving cannabis clubs: An expansion of the landing page with additional content sections for the real estate company targeting cannabis clubs. Include an 'About Us' section detailing company history and mission, a 'How It Works' section explaining the property finding process, additional testimonials, a frequently asked questions (FAQ) area, and a latest news or blog section to provide industry insights and company updates. The design should continue with the professional and sophisticated theme of the first variant.
+CRM for medical call center: A side menu that is consistently present across all CRM pages, containing links to Dashboard, Patients, Schedule, Billing, Clients, Business, and a module for Profile, Users, and Permissions configuration.
+Home services booking application for various users including artisans.: Screen to view past interventions and artisan's ratings from clients.
+Expanded landing page for real estate company serving cannabis clubs: An expansion of the landing page with additional content sections for the real estate company targeting cannabis clubs. Include an 'About Us' section detailing company history and mission, a 'How It Works' section explaining the property finding process, additional testimonials, a frequently asked questions (FAQ) area, and a latest news or blog section to provide industry insights and company updates. The design should continue with the professional and sophisticated theme of the first variant.
+Home automation hub for controlling smart devices.: A screen where users can create and manage scenes or routines. Users should be able to set triggers (time of day, device status) and actions (turn devices on/off, adjust settings) for their scenes.
+Website page for AI-generated photography services: A webpage detailing two AI-generated photography service packages for local businesses. The 'Basic Package' outlines a fixed number of category-specific photos with standard support and a one-time payment. The 'Subscription Variant' offers monthly updates, customizability, priority support, seasonal specials, and discounts on additional services with a monthly fee.
+Religious education app for Quran study: Create a mobile app screen for a dashboard that includes a personal account section with daily reading tasks, inspirational content, and video resources to assist with reading the Quran.
+International product booking and delivery app: Display detailed information about the product, including images, description, price, and an 'Add to Cart' button.
+Donation page for an NGO website: Design a screen for an NGO donation page featuring three different payment modes: UPI, Bank Transfer, and Debit/Credit Card. Include clear selection mechanisms, details required for each payment method, and a prominent donation button.
+Mobile app for personalized user settings and promotional content: Design a settings page that includes a user's profile section at the top, followed by a section for advertisement cards. Companies can use these cards to display their latest news or ads to the user. Each card should feature a close icon, allowing the user to close it with a tap, or swipe left to dismiss it. Once a card is dismissed, the next card in the deck should automatically be displayed to the user.
+Landing page for displaying and selecting scholarships: Design a landing page with 4 rows of 4 cards each. The first row features scholarships, the second row is for college scholarships, the third for extracurricular scholarships, and a fourth row for additional content. Include a left sidebar that displays the scholarships the user has selected. The main CTA button should have a gradient from #C41084 to #950164. Ensure the design is fun, exceptionally accessible, and incorporates real photos of students.
+Mobile dating app for matching users: A screen designed to match people on a dating app. The screen should display potential matches with their profile pictures, names, ages and a short bio. There should be intuitive controls for the user to like, dislike, or learn more about the person. Features such as mutual interests or compatibility score could be integrated. The design should encourage user interaction and engagement.
+Webpage for a consultancy and software development company: Comprehensive overview of the services offered, including the stages of engagement from problem-solving to software development.
+I need a login and registration pages for this Saas website design
+A mobile-friendly website for discovering and booking activities and tours nearby: A mobile-friendly website screen for finding local activities and tours that features a search bar, a list or grid of activities with images and brief descriptions, filters for activity types, sorting options, and CTA buttons for booking or details.
+Website for beauty product sales: Create a wireframe for the Glamour C.L homepage, emphasizing the structure and layout of elements. The wireframe should display placeholders for a main banner, navigation bar with categories, featured products section, customer testimonials, and a subscription form. The focus is on the arrangement and hierarchy of content for the sales of beauty products, rather than on the visual design details.
+Website for Uzbek cuisine with a cozy and modern atmosphere: Design a homepage for a website featuring Uzbek cuisine. The design should feel cozy and modern with warm, inviting colors to reflect the rich flavors and textures of Uzbek food. Include sections such as 'About Us', 'Menu', 'Gallery', and 'Contact'. The top should feature a large hero image of a traditional Uzbek dish, with navigation to other pages. Ensure the layout is user-friendly and the look and feel convey a fusion of tradition with contemporary design.
+Mobile web design for an antique mall: This screen should feature a welcoming landing page for an antique mall with a vintage aesthetic. It should include a hero image with a captivating headline, a brief introduction about the mall, featured antique items, upcoming events, and a footer with contact information and social media links.
+i want a commercial website
+Mobile app for musicians to post and sell music tracks.: An interface for users to review their track selection, choose a file format, and complete the purchase with payment information.
+Mobile app for managing and recharging transportation cards in Manizales: A mobile app home screen acting as the dashboard for the cable transport card service in Manizales. This screen should prominently display the user's card balance, quick access to recharge, recent transactions, and navigation for other features like profile, transaction history, and support. The corporate colors red and black should be integrated into the design to maintain brand identity.
+Music streaming app for personalized user experience: Users can explore new releases, top charts, and different music genres.
+Mobile app for booking concert tickets: A screen where users can browse a list of available concert events, featuring event images, names, dates, and a search filter option to narrow down the choices.
+Mobile app for barber shop inventory tracking: Helps manage salon inventory, track product usage, order new supplies, and check stock levels.
+Mobile app for building and viewing Lego models: A mobile app interface where users can select Lego sets and view 3D models of the completed build. The screen should feature a searchable list of Lego sets, a 3D viewer to see the model from different angles, and options to start a new build or continue with a saved project.
+Accounting app for managing financial records: Design an 'Account Balances' tab for the accounting app that shows a summary of all account balances. Include a table listing the account names with their respective current balances and a graphical representation, like a pie chart or bar graph, showcasing the proportion of each account's balance relative to the total. Add a button for refreshing the balances.
+acts as an expert in energy management, I want to design a graphic interface where I can see a summary of the energy efficiency of a plant, for a specific process, having the electrical consumption in real time and the standard consumption for the process, having in the interface data such as total energy consumption, standard of energy to be consumed, consumption indices, comparison between real consumption vs. standard, energy efficiency trends, comparative curves, streaming data
+E-commerce store for video games and anime figures: A vibrant home screen featuring a curated selection of video games and anime figures. Theme colors red and white should dominate the interface, providing a dynamic and lively ambiance. Top navigation should include categories for games, figures, new arrivals, and sales. Below, a rotating carousel banner should highlight featured products and promotions. Product tiles should display game and figure images with titles, prices, and 'Add to Cart' buttons. A footer with links to customer service, about us, and social media pages is also required.
+Website to showcase a special offer: A landing page with a captivating hero section, details about a special offer, eye-catching images, and a clear call to action button. It should also include testimonials and a contact form.
+A mobile app for a cafe: Create an Interactive Menu Screen where users can browse through categories (e.g., coffees, teas, pastries), select items to see detailed descriptions, ingredients, and add them to the cart. This screen should be visually appealing, intuitive, and make it simple for users to customize their order, such as selecting the size or adding extra toppings.
+Fashion webshop for earrings with a high-class Zara-inspired style: The home screen should feature a clean and artistic layout showcasing featured earrings. It should have a high-class feel with promotional banners and navigational elements that guide users to various categories or current sales.
+Real estate marketplace app focusing on ease of use and visual appeal: This screen should have a clean and easy-to-navigate layout showcasing featured property listings. At the top, there needs to be a prominent search bar for users to quickly find properties. The listings should be displayed in a visually appealing manner with prominent photos.
+Space-themed sci-fi game with blockchain integration: Design an interface for a space-themed sci-fi game that incorporates blockchain features. The screen should include elements such as a cryptocurrency balance, a digital marketplace for trading in-game assets, and mission rewards tracking. It should have a cosmic aesthetic with elements that reflect both the vastness of space and the digital nature of blockchain technology.
+A mobile app for a tea shop selling Indian beverages and snacks: A Home Screen featuring highlighted items such as popular teas, samosas, and vada pav, with eye-catching visuals. This screen should include a welcome message, a search bar at the top, sections for 'Recommended', 'Popular Items', and 'Today's Specials', along with promotional banners for discounts or new arrivals. Each featured item should have an enticing image or video clip, a short description, and a call-to-action for users to explore more or order directly.
+App for merchants to post offers and discounts with QR Code redemption.: After the merchant submits an offer, this screen generates a QR code that customers can scan to redeem the offer. Should display the QR code prominently and have an option to download or share it.
+Mobile scrolling website for interactive scratch cards: A mobile landing page dedicated to showcasing various scratch cards with vibrant graphics and essential details such as cost and potential rewards. This page should allow users to scroll through the selection, get a quick view of the scratch card themes, and access the 'Play' or 'Buy' action for each card.
+Mobile app for a hookah place: Displays upcoming events, special nights, and allows users to RSVP or buy tickets.
+Mobile app for safety and assistance: A screen displaying a location map with the user's current location highlighted. In the center of the screen, there are two buttons - one is red with the word 'Emergency' and the other is orange with the word 'Help'.
+Mobile app dashboard for ChatGPT user metrics: Design a mobile dashboard where users can see key metrics such as conversation count, topics covered, time spent, and feedback scores. It should have a clean, modern look with readable typography, a user-friendly color scheme, spacing for clarity, and include interactive elements like charts and filters for date range.
+Health tracking app for POTS Syndrome: A calendar view screen to track daily symptoms and log activities or medications with an easy input method.
+Futuristic dashboard for team management: A futuristic dashboard interface for managing storage, showing usage statistics, and providing options to upgrade or clean up space.
+Chrome extension sidebar designed for the threads.net platform with dark mode: A dark-themed sidebar for a Chrome extension. The design should feature an elegant appearance with a heading at the top, followed by a personalized greeting with the user's name. It should include three menu items, an input line, and an input textbox for user interactions. Additionally, there should be a list of link cards displayed.
+Chrome extension sidebar designed for the threads.net platform with dark mode: A dark-themed sidebar for a Chrome extension. The design should feature an elegant appearance with a heading at the top, followed by a personalized greeting with the user's name. It should include three menu items, an input line, and an input textbox for user interactions. Additionally, there should be a list of link cards displayed.
+Awesome hero section for an education academy web app
+A Case studies page for a SaaS startup
+Web app for managing employee support tickets: A web interface featuring a side menu with the company logo at the top corner, an upper bar displaying employee data and their total number of tickets, and a table with tickets categorized into columns labeled as New, In Process, and Closed. The design should utilize a midnight color palette to give it a professional and modern look.
+E-commerce app for online grocery shopping: Design a welcoming landing page for an online grocery store that features a main banner with a promotional offer, a search bar at the top for finding products, categories of groceries for easy navigation, and a section for featured products and deals of the week.
+Marketplace for images: Design a home screen for an image marketplace showcasing featured images. Include a header with navigation, a featured images section with prominent and high-quality thumbnails, and a footer with site information.
+Mobile app for IT support and help-desk services: Design a minimalist login screen with animation effects using PixiJS and glassmorphism style. Include a logo with the text 'HELP-DESK'.
+Web application for administrator and client interactions on social media platforms: Interface for administrators to view recent transactions, outstanding balances, and access controls to activate installment payment plans for clients.
+Mobile app for NGO donations and support: Create a single comprehensive donation page for the NGO Support app. The page should motivate users to donate with engaging visuals and clear information. Include one-time and monthly donation options with the ability to customize amounts. Incorporate a dynamic progress bar for fundraising goals, options to dedicate donations to specific projects or individuals, and visual breakdowns of fund allocations. Ensure a secure transaction process with multiple payment methods. After donating, display a personalized thank-you message, social sharing options, prompt for recurring donations, trust badges, and a feedback form. Make sure the design is mobile-responsive.
+Banking app designed for teens: The main dashboard for teens showcasing a quick view of their savings, recent transactions, and a credit score tracker. Should feel interactive and informative.
+Mobile app for a clothing shop: Design a mobile app homepage for a clothing store including a top navigation bar with a search feature, and a menu bar. The homepage should showcase sections for various clothing categories like shirts, pants, traditionals, and suits. Include visuals for featured items and promotions.
+Shoe website for a broad range of customers: A home page showcasing a selection of featured shoes with categories at the top for easy navigation.
+Sneaker e-commerce and auction website: Detailed view of individual sneakers for sale including price, description, add-to-cart button, and user reviews.
+indian traditional embroidery dresses landing page
+Mobile app for sake enthusiasts: A mobile screen displaying a list of Japanese sake options, where each item includes an image of the sake bottle, the price, and a short description of around 100 characters.
+An engaging conversational interface where the AI Styling Assistant offers personalized fashion advice, responding with the insight and sensitivity of a human stylist.
+Social networking app with customizable user experience: Create a Settings page that includes a user profile section. Within the Settings page, design an area for advertisement cards where companies can display recent news or promotions. Users should have the ability to close these cards either by tapping a close icon or by swiping left, after which the next card in the sequence will be presented.
+Secondary page for a professional graphic designer's website: A dedicated gallery page to showcase a diverse portfolio of the graphic designer's work, featuring categorical filters, project types, and interactive elements to engage the visitor.
+Music streaming platform with search capabilities: A screen that provides a search facility for songs, albums, artists, and playlists.
+Mobile design for company introduction screen: Design a company introduction screen with fixed header and footer. The header includes the company logo and navigation menu. The footer contains contact information without social media links. The body should have clearly defined sections for company overview, mission, services offered, and team introduction.
+User Profile View
+This is a homepage for a web-app that unpaid family caregivers can use to access an AI chat bot for product and service recommendations, build a profile so that they can see customized content, schedule a call with licensed social workers to get guidance, invite other caregivers to join them on the app, and browse personalized content and learning resources. This should be a clear and modern interface that emphasizes one thing at a time for the user, who is emotionally overwhelmed and seeking a sense of safety and warmth. Please elevate and improve this design.
+Website for showcasing writers and their work: A profile page for a writer, featuring details accentuated in gold. Include a dedicated space for the 'quote of the day' that allows different quotes to be featured daily.
+Esta é a minha página de welcome page atual, no entanto quero que a melhores
+Racing game publishing platform website: Screen presenting the base racing game with a vivid description, engaging trailers, screenshots gallery, and a call-to-action to buy or learn more about the game.
+Mobile e-commerce platform for retail shopping: Homepage layout where users can browse product categories and featured products. The page should allow browsing without signing in, with a prominent option and promotion to encourage users to sign up. The page should also include a headline or section for top recommended products for the period in an implicit manner.
+Event invitation app for personal occasions: Single page mobile-friendly baby shower invitation with details about the event such as date, time, location, RSVP information, and a cute and welcoming design.
+Website for custom woodwork project showcases and inquiries: Design a website dedicated to showcasing custom woodwork projects with a focus on interior and exterior residential and commercial uses. Include sections for set design, landscaping, facades, and ornamental finish work. The site should highlight the craftsmanship and allow for inquiries on custom builds.
+Lead generation platform for home services: A welcoming home screen displaying various home service categories such as Plumbing, Electrical, Cleaning, etc., with a search bar at the top and a promotional banner.
+Landing page for a revolutionary augmented reality system for children: A landing page for 'Child's Play', an augmented reality system enhancing childhood wonder. Includes a hero section with an engaging headline, features explaining the AR system's benefits for children's imagination and bonding with parents, customization options, and educational modules. A testimonials section and a call-to-action for demonstrations or purchase are also needed.
+Mobile app for a minimalist products store: A home screen for a mobile app that showcases a selection of minimalist typical products. The design should be clean and modern with a focus on product visuals. Key elements include a search bar, featured products, categories, and promotional banners.
+Real estate investment platform: A screen that displays detailed information about a property in a real estate investment app. It includes a feature where users can click on a button to open a modal for uploading investment documents related to the property.
+Web app for a furniture company: A landing page for a furniture company that showcases featured products, customer testimonials, and a prominent call-to-action for the latest sale. Include a navigation bar with links to various product categories, an about us section, and a footer with contact information and social media links.
+E-commerce Dashboard for a mobile app: A screen summarizing the total sales for the current month with a chart or graph and key performance indicators.
+Web app for parking space rentals: A welcoming homepage for a parking space rental web app that features a search bar prominently, along with categories and suggestions for popular cities or areas.
+Nostalgic theme park vacation website in vintage Disneyland style.: A calendar and events page with a design inspired by vintage posters, including classic iconography and stylized event listings.
+Social network gaming app: Design a User Profile Screen where users can view and edit their profile information, achievements, and game stats.
+Citizen service mobile app serving as the central hub for the app's main features.: The landing page after login, featuring a summary of key information and quick access to the main features of the app such as services, news, and personal data.
+Mobile app for browsing and booking movies: A home screen featuring a bottom navigation bar with the options 'Pelculas', 'TV', 'Favorito', and 'Buscar'. Within the 'Pelculas' section, there will be subsections for 'Lo ms visto', 'En cartelera', and 'Prximamente', showcasing various movies.
+Landing page for a frontend developer: A sleek and professional portfolio webpage for a frontend developer, featuring a monospaced font throughout for a tech-inspired aesthetic. The page should have sections for About, Work Experience, Projects, Skills, and Contact. Each section should be easily distinguishable and contain relevant information and visuals that highlight the developer's expertise and past work. The monospaced font should be used in a modern way, ensuring readability and a clean layout.
+Flower arrangement app with plant identification feature: This screen features a gallery of trendy flower arrangements. Users can browse the collection, tap on an arrangement they like, and get details including the plant species present in it. A 'Plant ID' feature allows users to take or upload a photo of a plant, which the app then identifies.
+Website for an immersive online museum experience: A visually engaging homepage for an experiential website offering a 3D virtual tour of a museum. The page should feature a large, interactive 3D model of the museum that visitors can click to start their tour. Include clear CTAs for starting the tour, learning more about the museum, and navigating to other sections of the site such as exhibitions, events, or educational resources.
+Mobile app for personalized user settings and advertisements: Design a settings page that includes a user profile section and a separate section for advertisement cards, where companies can display the latest news or ads. Users should be able to close these cards using a close icon or swipe left to dismiss, after which the next card appears.
+Landing page for a venture capitalist firm: Design a landing page for a venture capitalist website with a hero section featuring a snowy mountain. The overall look should be subtle and elegant, with smooth color transitions and a sophisticated typography. The hero section should have a prominent CTA button and include space for a tagline and a brief introduction of the VC firm.
+Desktop app for managing tabbed personal and specific date availability: A desktop screen designed with tabs, one for setting general weekly availability (Monday - Sunday) and another tab for overriding with specific date availability. The interface should allow easy navigation between tabs and a user-friendly way to set and edit time slots.
+Mobile app for travel planning and suggestions: Design a map interface for a mobile travel app featuring two distinct types of marker pins: one type for items that are part of the user's set itinerary for a specific day, and another type for recommended items that the user could consider adding. The interface should provide a modern and aesthetically pleasing map view, with clear differentiation between the two types of markers, enabling users to visually distinguish between planned activities and potential recommendations.
+Web app for comparing residential properties: Design a dashboard screen for a web app where users can submit a URL for a residential property. The dashboard then displays a list of 8-10 residential properties for sale in proximity to the submitted URL. Features to compare include pricing, size, location, and surroundings. Styling should be playful with a blue, green, and white color theme.
+Landing page for a note-taking application tailored for daily use: A landing page for a note-taking application that emphasizes the daily notes feature, inviting users to organize their thoughts and tasks every day with ease.
+Mobile dashboard for milk farmer management: A mobile screen within a milk farmer dashboard for booking farm substitutes. This screen should provide a clear interface to select dates for holidays or weekends off, list available substitutes, include search filters for specific skills, request booking, and confirmation details.
+Mobile app for a furniture store: This screen displays detailed view of a furniture item, with high-quality images that can be swiped through. Below the images, there's a product title, description, price, and an 'Add to Cart' button. Users can also access reviews, related products, and share options.
+Subscription service mobile app for farmers: A landing page featuring a hero section that highlights the unique selling points of a modern and fresh mobile app designed to help farmers find qualified substitutes. The page should emphasize ease of administration and time-saving features for both farmers and substitutes.
+Company intranet feature for enhancing peer-to-peer engagement: Create a compact component for a company intranet webpage that allows team members to get instant feedback from their colleagues. This component should enable users to view received feedback, request feedback from peers, and include a feature that suggests potential colleagues to share feedback with.
+Feature page for a web app aimed at speech therapists: This screen needs to highlight the key features of a productivity web app designed for speech therapists. It should include sections for client management, therapy session planning, progress tracking, and resource library. Visual elements like icons or illustrations that represent each feature would enhance the user's understanding. The layout should be clean, with an intuitive navigation system that allows therapists to quickly find what they need.
+Web application for monitoring and analyzing athletic performance: Design a dashboard where the primary focus is on tracking the performance of a ski athlete named Jess who specializes in giant slalom. The dashboard should include an area for detailed performance metrics, trend graphs and progress over time. A sidebar should prominently display Jess's profile, including her specialty, photo, and related personal information.
+home page for real estate app, focusing on popular homes in seattle
+a home page for real estate app, showing popular homes in seattle
+Mobile web interface for selling household chemicals: Detailed page for a household chemical product, showing images, descriptions, price, customer ratings, and an 'Add to Cart' button. Related products and reviews section also included.
+Website for showcasing a UX designer's work and background: Design the main page for a UX designer's portfolio website. This page should feature a prominent welcome message, a brief introduction of the designer's expertise and background, a showcase of recent projects, and an easy navigation to other pages such as About, Portfolio, Resume, and Contact. The layout should be clean, professional, with a focus on highlighting the designer's work and skills.
+Web app for online subscription services: Design a modern pricing page with a prominent feature to highlight the special offer for the first week starting at one dollar. The page should showcase different pricing tiers, include a comparison of features, and have a clear call to action for users to sign up.
+Website design for a medical school: Design a sleek and contemporary medical school homepage with a light blue, white, and grey color palette. Include a top sticky navigation bar, a hero section with a carousel of images and text, calls-to-action, card and section-based content organization, consistent imagery style, interactive elements like hover effects and accordion FAQs, and a structured multi-column footer.
+User experience for online survey platform: Design a web interface that displays the number of surveys completed versus the surveys left to be completed. Include a progress bar to visually represent the completion rate, a detailed list of completed surveys with timestamps, and a section listing the pending surveys with estimated completion times.
+Expense tracker app for couples: A finance analytics page that features multiple charts showing the overall balance, separate weekly and monthly spending for both partners, and a chart that allows filtering by expense categories.
+Desktop app for movie production budget management: A desktop app screen for a movie producer excel-like app that displays budget allocations by departments such as Lighting, Sound, and Costumes. The screen should feature a spreadsheet or table view where each department is listed with its allocated budget, spent amount, and remaining balance. Visual indicators such as color-coded cells or progress bars should aid in quick identification of discrepancies. There should be functionality to adjust values and rectify budgetary issues.
+Web page for image format conversion: Design a web page dedicated to converting PNG image files to WEBP format. The page should include an upload area for users to drag and drop their PNG files, a convert button to initiate the conversion process, and an area to display the download link for the converted WEBP file. There should also be a simple guide on how to use the converter and the benefits of WEBP format over PNG.
+Website for a creative agency: A portfolio website showcasing the creative agency's past work, team, services, and client testimonials. The homepage should have a modern and engaging layout with vibrant visuals, a brief introduction, featured projects, an about us section, services overview, testimonials carousel, and a call-to-action for contacting the agency.
+Property management dashboard for hotels with a green theme: A property management dashboard interface for hotels, featuring a green color theme. This dashboard should allow hotel staff to manage room bookings, check guests in and out, handle billing and payments, monitor room status, and provide reports and analytics.
+Website for a company providing ChatGPT training for business professionals: A homepage for a company specializing in training business users on how to effectively use ChatGPT. The design should have a modern and professional look, featuring sections such as 'About Us', 'Training Programs', 'Client Testimonials', 'Contact Information', and a prominent 'Register Now' button. Use a clean, corporate color scheme and include images or icons related to AI and business education.
+Landing page for a book club for product designers: A landing page for 'Designer Book Club', featuring a section to view previously read books with notes and discussions, a showcase of the current book being read, and a call-to-action to join the Discord community.
+Healthcare app for patients to manage their health data: A dashboard page for a healthcare app, including a bottom navigation bar with tabs for Home, Chat, Timeline, and Tracking. The main content area should show an overview of the user's health summary, upcoming appointments, and quick access to their medical records.
+In software like Carta, which focuses on managing company equity and ownership. Design the Dashboard page: This is the main screen where users get an overview of their account, including recent activity, key metrics, and quick access to various features.
+I'd like the new page to show the stage of the mortgage process they're at with financial details and graphics
+Create a landing page for an NFC digital business card company. The business name is Bl1nk.
+Management Strategies - This screen should focus on deeper insights into employee performance, explaining the 'why' behind the data. It would be useful for managers looking to develop more effective management strategies.  I want this UI to have a 4 card display that will have textfrom management strategies Category , with a see more button, and a text input field at the top of the cards where Users will enter text that will lead to the generation of actionable insights. Let this UI be beutifule with good aesthetics and modern design. It should look like a web  App, for an EXP product
+A page on a ChatGPT app where I can pick a subscription plan, one plan has GPT-5 and the other one have RPG mode
+Generate dashboard charts for accounts receivable software for a webapp
+Design the 'above the fold' area for a desktop online shop's homepage, specifically catering to high-fidelity audio enthusiasts and home cinema aficionados. This section should feature a sophisticated, high-resolution banner that immediately captures attention, with imagery of the latest high-end audio equipment in an elegant, home setting. The navigation bar should be prominent, offering intuitive access to categories like 'High-End Equipment,' 'Latest Tech,' 'Expert Reviews,' and 'Customer Care.' A central slogan should articulate the shop's dedication to audio excellence, such as 'Where High Fidelity Meets Home Cinema.' Include a search bar within the navigation pane for quick access. The banner should have an interactive element, like a slider or video, showcasing flagship products and their advanced features, with call-to-action buttons like 'Learn More' and 'Shop Now' that are clearly visible. The color scheme should blend a dark backdrop with metallic accents to convey luxury and quality. The overall layout must be clean and uncluttered to highlight the message of exclusive, high-quality products and services.
+Create a homepage layout for a desktop online shop targeting audiophiles and home cinema enthusiasts. The design should feature a clean, high-end look with a sophisticated, technological feel. At the top, include a prominent, sleek navigation bar with clear categories like 'Products,' 'Brands,' 'Special Offers,' and 'Support.' Below, integrate a large, visually appealing banner showcasing the latest products or deals. The main section should display featured products in a grid format, emphasizing high-quality images and brief, informative descriptions. Include a section for customer testimonials and expert reviews, giving the page a sense of trust and expertise. The color scheme should be modern and elegant, with a focus on black, white, and subtle metallic tones to convey a sense of premium quality. The layout must be intuitive and user-friendly, ensuring a seamless shopping experience for tech-savvy audiophiles.
+Tinder for pet sitters
+This is a home page of a diet health app. It shows the user's weight losing goals
+A design of a podcast app home screen, where we display popular casts in a horizontal scroll view, below that a button that indicates "Enter a Random Cast" and then below that perhaps a grid of tiles representing different genres.
+A podacst app homescreen design where we show podcasts by different categoreis, perhaps by Genre, by Popular Casts, by Celebrity Favorites, etc... Make the Displays varying.
+A workday and LinkedIn app that allows users to purchase recruiters in an auction format
+website for Lego setup instructions featuring a cool spaceship lego design
+A podcast apps home page
+Generate a good looking catchy and approachable shopping website for ITG Mart in the style of Amazon
+create a ios mobile page which helps in tracking a users location. it should have a start and stop button to enable/disable location tracking
+Homepage for online marketing agency, containing hero header and image, Unique Selling Points, testimonials, location info and a contact form. Colours used are grey with a hint of orange.
+calendar view
+A website for Nodding Dog Training. The vibe is simple, retro but minimal, with a clear journey for the user as the come to the front page to bring them to the initial assessment booking button.
+Page in a theme park attraction waiting times app, where users can view the queue times of all the attractions of a theme park. List only with colors for the different waiting times. Don't use images for the attractions. The page must be playful and modern.
+landing page for a foreign exchange website with green and white as the color scheme
+Show a job seekers career journey that also has rich media like images, video and audio clips. Make it very appealing with great ui design
+App for sprcialized porache car service. Dark mode with accent colour red. Premium look and imagery
+Generate a ordering page for a food technology company
+A food delivery app similar to UberEats but more modern and nicer.
+create a word game design
+Design a landing page for "HomeHub," an innovative smart home device that centralizes control over various household functions. The product seamlessly integrates with smart lighting, security systems, and home appliances. The landing page should exude modernity and sophistication, with a clean layout and a color palette that complements contemporary home aesthetics. Emphasize the device's intuitive user interface, showcasing its ability to simplify home management. Use high-quality visuals to highlight key features such as voice control, energy efficiency, and compatibility with popular smart home ecosystems.
+An online library where students get access to millions of books of all genres including on fiction, physics , math, etc. Designed with tailwind classes, name it Librify
+educational platform for mutual funds
+Design a landing page for a movie theater application. Include show times and review section
+fantasy-themed discord profile page
+Sports feed on a video streaming app, featuring famous teams like the NFL and NBA. It includes sections for upcoming live sports and football games, designed in dark mode with blue as the primary color.
+A UI for a blockchain playground webpage that allows users to select a preset dropdown. After selecting a preset it displays the "chain-id" "rpc url" and "rest url". Additionally there is a "custom" option on the preset dropdown that lets users enter the values manually. Additionally there is a code box that allows users to preview how to do this using the associated javascript library
+A car booking confirmation page in the car rental app details the chosen car's information, add-on options, pick-up and drop-off times and locations. It includes a button displaying the price and a confirmation option.  An account profile page in the family organization details the profile's information, family options, switching account and settings.
+Product page for purchasing items from Animal Crossing, with game-inspired content.
+An online modern pawn shop where individuals can get pawn secured loans for their valuables (such as jewelry, gold or watches).
+An online modern pawn shop where individuals can get pawn secured loans for their valuables (such as jewelry, gold or watches).
+dashboard for billing managers to update bills
+Healthcare document analysis with a right side column for multiple entries that user has to manually enter
+a dog app with carousel of a list of dogs needed to be walked with a search bar at the top and then another carousel at the bottom
+Page in a doctor appointment booking app for editing personal information, where users can update names, emails, and phone numbers, and add emergency contacts.
+An explore page for a store that sells mid-century Scandinavian furnitures called Danish Design
+Results page in a music app for viewing artist and album listings.
+a landing page for a german designed medical device currently being developed in stealth that would revolutionize the cardio health sector
+3. Expenses Overview ScreenPurpose: Detailed view of expenses.Elements:List of recent transactions with date, category, and amount.Filter options by date range, category, or amount.Total spent in the current month/year.
+Design a homepage for a global diagnostic company. Make it feel clean, but also use people to humanize the company. Use the color navy blue for buttons.
+a web dashboard of a SaaS application that allows climate project developer to certify the emission reduction of their carbon mitigation activities. the dashboard should provide a document management module, a data collection module,  a project management module, Key impact indicators module such as COE evited with different scenarios and volume of carbon certificate verified and issued monthly and yearly.
+Ordering page on a coffee app featuring sections for popular coffee drinks and breakfast food options.
+Drugs database
+Create a mobile homepage for an online casino called Circa. Ensure there are a few slot games, along with the logo and call to action buttons for register and login
+saas design web 3 agency
+Futuristic Design Club page with 3D tools animation
+generate successful ending of the course
+design a homepage for a realtor scheduling app. Needs to be able to book showings, receive inbound showing requests and respond to them. in a green colour scheme
+I want to see Dashboard with focused search bar, filter chips, and wide football matches cards with information like: Team A vs Team B, date of football match, place of football match, preview picture, tickets start price (sold out if no tickets available), Popular tag if it is popular football match.
+A conversation transcript player page with timestamps and speaker names, for a conversation that is 2 or 3 hours long. It should have a play/pause button, skip 15 seconds forward and backward, increase the playback speed, and a slider. It needs to show conversations that are 2 or 3 hours long. It should have the ability to comment on parts of the conversation. Also have the ability to search in the transcript.
+Design me a calendar mobile app on a single day view with a vertical agenda view. Please use lines for the hours & half hours. Find ways to work in the weather with icons & temperature please! Give callouts for when the weather will change - and how much time until the change.
+Landing page for an online shop selling insect snacks, featuring nutritional and sustainability information.
+Dashboard of football tickets reseller(name "Fanby") with search at the top, filters and bottom bar. An ability to see 'popular' football match and short information.
+Design a facebook page wellness and relax style whit massage photos
+home screen for life insurance sales, curation, category, insurance status
+generate a webpage for online grocery ordering
+Create a parcel ordering page (best UI ux) for a UPS like company
+Create a transport ordering page (best UI ux)
+A webscreen that shows academy profile containing Information about the academy, such as location, contact details, and a brief overview.
+create a starbucks style ordering page featuring sections for popular drinks and food options and their reviews
+a landing page of a dog sitter app
+A UI to for a keyword search functionality that allows the user to select which documents to search (LOR, Personal Statement, Other) and provides a count of keyword occurences as well as a link to the document it occurs in.
+imagine photo and video screen from this app, but where will be some already done trips as a list
+"Design a user interface for a soccer club's application dashboard. The main focus of the design should be a Fintech component, showcasing financial information related to the club such as revenue, expenses, and financial statistics. Additionally, include modules to display recent match results and a schedule for upcoming games. The design style should be modern and user-friendly, featuring a color palette that reflects the team's colors and interactive graphics for an engaging user experience. Ensure the design is intuitive and visually appealing, with an emphasis on clarity and ease of use.
+Create mobile interface for photo editor app
+Home screen for wellbeing app that provides support after layoffs at work. There should be a way to message your therapist, schedule a video call for therapist session or cv / job coaching session.
+Healthcare iOS mobile application that allows patients to schedule an appointment to see their doctor at a preferred time and location.
+dashboard for showing stock investment positions
+create a hinge style dating profile page
+create a doordash style product detail page for Sephora makeup
+create tiktok shop app
+An app that let's drivers identify a car problem by the noise it makes.
+create an iOS app that is for voice messaging. Create a page that includes messaging chat between 2 users. The messages will be audio, and there will be grouped messages that relate to the same topic
+ui design about donuts with pink background
+Ordering page on a coffee app featuring sections for popular coffee drinks and breakfast food options.
+A beautiful features section for a SaaS landing page, where 4 features are displayed. Each feature has a title, description and a screenshot.
+Home page for a meteo app that describes the hours and grades in Naples
+create an airbnb style listing for a cozy tiny cabin
+Create a page outlines the dramatic events at Open AI in the past few days, using a timeline view.    Here’re the events:   1. Ilya schedules call with Sam Altman 2. OpenAI board fires CEO Sam Altman 3. Open AI annonces exécutive change  4. Greg Brockman demoted and then quit 5. OpenAI researchers resign following leadership changes  6. Sam plans his new venture  7. Altmansnegotiates to go back to OpenAI 8. Altman, Brockman joins Microsoft 9. Emmet Shear appointed as interim CEO 10. Ilya expresses regrets  11. OpenAI employees threatens to resign to ask Sam to return  12. Board tension escalates  The story continues…    Use Sam Altman or Greg Brockman’s profile in leading assets at where it’s appropriate
+Create a page outlines the dramatic events at Open AI in the past few days, using a timeline view.    Here’re the events:   1. Ilya schedules call with Sam Altman 2. OpenAI board fires CEO Sam Altman 3. Open AI annonces exécutive change  4. Greg Brockman demoted and then quit 5. OpenAI researchers resign following leadership changes  6. Sam plans his new venture  7. Altmansnegotiates to go back to OpenAI 8. Altman, Brockman joins Microsoft 9. Emmet Shear appointed as interim CEO 10. Ilya expresses regrets  11. OpenAI employees threatens to resign to ask Sam to return  12. Board tension escalates  The story continues…    Use Sam Altman or Greg Brockman’s profile in leading assets at where it’s appropriate
+use the images component to show an image of a dinosaur
+marketplace for digital clones of therapists
+An app focused on kefir and its benefits.
+create a gasoline app for me where I can see offers for coffee and croissant. The primary colour is green and secondary colour is yellow. The app has a menu bar at the bottom where I can select offers, map and profile.
+Profile of an app for hypermarket retail chain. Features orange as the primary colour and black as a secondary. Name of app is Hagkaup.
+ridehailing app
+I want an app to buy fine jewelry. I want the design to display the landing of a ring, which contains the different colors the ring can have, as well all the size guide for the customer to see. Very user friendly
+help me design a homepage for a peer to peer crowd shipping , parcel sending an suitcase sharing mobile app
+designa. booking page for this mobile app
+Rental app listing page for Barbie's Malibu house, highlighting unique amenities.
+A user dashboard for an online healing program. each day has a series of videos for users to watch which should be at the top level and get marked completed as they complete each step. we also need a collapsable list below the top level which shows 5 phases of the movement program. each phase is broken into 10 sessions with 7 days of movement in each session. Below this we should have links to the Live Workshops and other specific lessons like back pain and hip pain.
+I want to design a website that showcases all the electronic gadgets I make including wearable medical device, drones and remote controlled cars
+A modern and inviting homepage for an apartment classes portal, featuring a large image of people enjoying classes in their apartment and a clear call to action to browse or search for classes.
+A simple and uncluttered browse classes page that uses a grid layout to display all of the classes offered in the apartment, with each class including a thumbnail image, the class name, the instructor name, and the date and time of the class.
+Sign-up page for a fintech app, including images, title, summary, login, and sign-up buttons.
+music app
+Discovery page in an audiobook app that enables users to browse popular categories and view upcoming popular books.
+a feed showing the most important moments of 2021
+A patient dashboard that displays the user's medical conditions
+Internship/Volunteering Opportunities Listing Screen:A list view of all the available opportunities.Filters for searching and sorting by skillset, duration, company, etc.
+A game library manager, it should split my free time for every game, and show me my next game to play with the time that i sould play it
+Design a home page for an app where a wedding related service providers can list there services with portfolio upload, albums creation and see active and pending requests for bookings from wedding couples
+Book a reservation in a restaurant, pick number of people, dishes
+A profile for a Japanese-inspired ceramics store, with a history of the maker, and popular ceramics for sell.
+A profile for a Japanese-inspired ceramics store, with a history of the maker, and popular ceramics for sell.
+A profile for a Japanese-inspired ceramics store, with a history of the maker, and popular ceramics for sell.
+A profile for a Japanese-inspired ceramics store, with a history of the maker, and popular ceramics for sell.
+Design the screen for presenting detailed information about TechX Pro. Use visuals, videos, and text to highlight key features and benefits. Ensure that the product details screen aligns with the app’s design language and color scheme.
+Generate a form with outlined fields that has a text field, a textarea field, a number field, a date field, a file field, a radio button field and a select field.
+An investing personal management dashboard
+Streaming app where I can pick from 3 subscription plans with different video quality and family sharing
+A social app based on Coruscant StarWars planet that features Jedi Council members and Siths with buttons to add them as friends, with a small description of their profiles, also shows expertise and padawans if applied, the social apps show stunning images and a look and feel very minimalistic, clean and brilliant
+a job-hunting app, in the style of a dating app
+create an app for world's best museums
+Home page for a video app, showing a mix of skiing videos
+Profile page of a doctor app, where I can book an online or in-person appointment, see patient reviews, and see the address and contact details
+can you design the home page to an application that helps companies hire talent right from the application
+A cat booking app with vintage theme
+A cycle rental app , modern design
+A detail view featuring a timer
+Bar charts would be great. And I would need separate pages (maybe Tabs) for each energy source because there are multiple meters per source
+multiple choice questions with five answer possibilites
+An app that displays a stream of offers, combining products with services, supported by embedded finance.
+an app for using an ai chatbot to generate and visualize halloween costumes.
+An app that allows parents to track their stock of halloween candy as kids come around throughout trick or treating
+A map of all the haunted houses nearby with user rating of how scary they are
+A video app page showing a documentary about a scary demon
+A real estate app like Zillow for a haunted house in Salem
+An app that allows users to track their stock of halloween candy as kids come around throughout trick or treating, Make the design spooky
+Home page a gallery of teddy dolls showing categories and the most liked ones
+A profile page for language teachers, gamer style
+a homepage for a brand new apartment community that has vacant 1 bedroom and 2 bedroom apartments for rent. it is a very high-end community with the finest amenities located in lower manhattan.
+A candidate profile page for private governess and language tutors for VIP families
+A landingpage for an app that generates pictures of cool looking cars with the help of ai.
+An application that lets you track the progress of your PlayStation trophies. Gamer style
+Web app for an AI image generator website
+An app that listens to the TV show or movie you're watching through the microphone, and then uses AI to summarise what has happened in the plot so far. If you fall asleep during a movie, you can catch up instantly with this.
+Golf loyalty rewards app  Key functionality: book tee times, check in to upcoming tee times on their phone, and redeem rewards points  Create a course page that shows upcoming tee times
+A home page for a golf loyalty rewards app. The app allows users to book tee times, check in to upcoming tee times on their phone, and redeem rewards points
+a reward flight programme app where you can search for flights with reward miles across different airlines with a setup alerts button
+Fantasy sports league app that gives you recommendations for who to play each week based on head to head matchups, strength of schedule, weather, illness, social media
+An AI recipe planning app, chat based, resembling Facebook Messenger
+a photo app with only black and white photos (IMPORTANT)
+A vertically scrolling feed of food related social media posts from various sources like Facebook, Tiktok, Instagram, etc with common "like" and "bookmark" functions on each item.
+a site that sells kids party decorations and kits to make any party a theme party
+A website for a new online community for designers to learn generative AI
+A better kindle app, more oriented for scifi readers
+Innovative podcast app a screen displaying the episodes
+a model showing that I don't like eating salads
+An story create page with one textfield, some options like is public、range for kids age、type of story、time length for story
+A page on a video app where I can pick a subscription plan, one plan has ads and the other one doesn't have ads
+A map view for a food delivery app, where there is a map on the top, then a bottom sheet showing a list of Italian restaurants nearby
+Profile page of a doctor app, where I can book an online or in-person appointment, see patient reviews, and see the address and contact details
+A personal fitness application where the user get a daily motivation message and a sample workout
+Make a page of all the people on Arya's list, ordered by A-Z of their names
+A profile page for a Japanese ceramic studio. Very minimal, no color, cinematic images inspired by Heath ceramics. Buttons should be square corners, no rounding. Serif font
+A weather forecast app focusing on how it will affect the surf at a user's favorite break. Also include the surf forecast.
+I want you to design me an onboarding page. I have these content: Title: the wait is over! Subtitle: Welcome to Galileo AI private beta. Click on the button below to start generating designs.  CTA: Start creating. Can you do a design using these copy? Also improve the copy however you see fit.
+A screen of a map to help people find homeless kittens
+The video summary page of an app that transcribes and analyzes all of my zoom videos, breaking a video down into various sections and bookmarks that can be used to navigate to different parts in the video
+A camera app with a available storage space
+an app that lets users save different locations on a map. Users should be able to add locations and place those into different collections that are browsable.
+An app that lets users book restaurants on a map
+a humane AI pin companion aop that can, install, run and create AI apps.
+Social media screen timing app
+an app to book a hotel room at the hotel california. include some hints that it is inspired by a song from the eagles. add a form to book for parents, kids and pets
+a map view for a Gallery Guide app
+I’m creating an e-commerce app focused on a surf-inspired athleisure company, create a detail page focused on a product related to this. The brand is modern and cool, photos should be cinematic and feel Scandinavian
+A mobile app for people who use Replit (replit.com) to share projects they worked on. It's a social and productive environment.
+A masterclass app with the brilliant, funny Richard Feynman as your private tutor. Use a vintage theme and a bold serif font.
+A app to request and upvote DJ tracks at parties. Include a list of queued songs with upvote and downvote icons (designed like Reddit), and an option to leave/join AirDrop-based party rooms.
+A song request app that lets users request and upvote the songs that DJs play at parties. Include party room joining, song request list, a voting system (like Reddit up/downvoting), and social features.
+Chat with AI personas of famous intellectuals (i.e. Ramanujan, Steve Jobs, Alan Turing, etc). Their text messages should be really unique to their personality.
+green themed crypto based social network
+build a design for kids to audio chat with a character
+Journal entry editor for a mobile accounting app that displays accounts, credits, and debits
+An application to build applications
+build a design for kids to audio chat with character
+design hoemscreen for akids learning app
+a login page for a b2b saas app called junior which is building ai workflow software for the management consulting industry. We want a monder and fun look.
+A page in a finance app for people to borrow money from it. It should have: available amount to borrow, an CTA, past loans history, and some value props.
+A discovery page on a music app where I can pick genre of music I like
+A page with modern UI, to help people cash out from part of their paycheck.
+A security desktop SaaS application that shows a user all of the documents in their enterprise
+an app for the men that are obsessed about the roman empire. use a sans serif font and caesar colors
+A music player showing hip french electronic music and features a way to donate to the artists
+Snack ordering screen showing popular snack and previously ordered snacks. Include the prices and ratings as well as how many times the previously ordered snack have been ordered. make it green and very vibrant
+An app to track wild animals in my garden
+An app to buy Polestar cars, photos should be cinematic and in epic locations
+Detail page in an ecommerce app for a Japandi-styled tea store in San Francisco that sells herbal teas and beautiful ceramics. The colors should be neutral and minimal with black buttons. The font should feel soft
+Detail page in an ecommerce app for a Japandi-styled tea store in San Francisco that sells herbal teas and beautiful ceramics. The colors should be neutral and minimal with black buttons. The font should feel soft
+A explore page for a Japandi-styled tea store in San Francisco that sells herbal teas and beautiful ceramics
+a profile page for max verstappen, primary color is red
+A discovery page on a music app where I can pick genre of music I like, dark mode, primary color is green. Use Jarkata sans as font
+a page that describes how to cook pasta
+A profile for japanese inspired store for cool ceramics that feature the history of maker and ceramics for sale, make the color light orange
+Discovery Tab in the fintech app allows users to search for promotional gift cards, exclusive sale offers, and a list of friends they can pay money to.
+An app showcasing different coffee brewing methods, include pour over and cold brew
+Profile page of a doctor app, where I can book an online or in-person appointment, see patient reviews, and see the address and contact details
+A map view for a food delivery app, where there is a map on the top, then a bottom sheet showing a list of Italian restaurants nearby
+the food app where I can order a big cheese burger with fries, and has a section of popular smoothies
+This page on a cool NFT site displays a few NFT art added to the shopping bag, including total cost and options to pay with either ETH or bitcoin or USDC, can you do dark mode, brand color is purple
+make a page for the gryffindor house with their best wizards, use the red color of gryffindor
+an app to track ants in my garden
+a fintech app where I can track mortgage rates in the us and see how much I owe for my house in Seattle. also add the hoa and property taxes
+A search result page displays information about a famous singer, including their name, photos, introductions, basic information, and related recent news.
+A discovery page in the audio book app allows users to browse popular categories and see upcoming popular books.
+A car booking confirmation page in the car rental app details the chosen car's information, add-on options, pick-up and drop-off times and locations. It includes a button displaying the price and a confirmation option.
+A page in the language learning app displays quiz completion and performance metrics, along with a "Continue" button to advance to the next chapter.
+An event detail page displays an 2024 burning man event’s header image, title, time, address, and a description.
+A movie detail page displays the teaser image header, movie information, and sections of similar movies and cast and crew information.
+A restaurant detail page in the food delivery app displays the map of the restaurant location, address, open time, phone number, website, and about info.
+A discovery page in the entertainment app displays a section of yearly picks and other sections featuring Oscar and other award-winning movies.
+a detail page that helps a user brew a v60 pour over technique, the steps should be listed in a timeline-style format with descriptions for each step with exact measurements
+an app with news about watches that is Forest Green
+Real estate listing for a house in Alamo Square, minimal, not a lot of text, show-don't-tell
+Social media feed of houses with halloween decorations, with the spookiest decorated house at the top, dark mode, the primary color of the design is read
+An app to buy tickets to the Taylor Swift era's tour on the secondary market, include funny bids
+An Airbnb listing of Barbie and Ken's dream house in Malibu. Include amenities like blimps, private beaches and meet-and-greets with Taylor Swift
+Social media feed of houses with halloween decorations, with the spookiest decorated house at the top, dark mode, red colors
+a zillow page for a haunted house, it should have bright orange halloween colors
+A detail view where people can build their own ugly christmas sweater by picking knitting patterns and animals. show a preview of the sweater and allow the user to pick colors, fabric and patterns. make it look fun an christmassy. use illustrations, use Christmas red colors
+Product detail view in a shopping app for a mid-century lounge chair, use cool walnut tone colors
+a page that describes how to cook pasta
+a dating profile page for aragorn in lord of the rings
+an app like zillow where I can buy a cute cottage from the shire in lord of the rings. I want to see the listing page
+a news app focused on the startup industry, show me a page focused on one article about an AI startup raising a lot of money
+an app like zillow where I can buy a cute cottage from the shire in lord of the rings. use an old school british style
+A page for the Slytherin house with their most evil wizards
+a detail page for a A frame renting app, show me the coolest rental that has a glow in the dark bathtub
+An app showcasing different coffee brewing methods, include pour over and cold brew
+Sign up screen in the fintech app includes an image, a title, and an app summary, with buttons for login and sign up.
+A screen in the fintech app allows users to invite friends/contacts to the app and earn cash. It includes an input field for invitee's information and a list of people from phone contacts to invite.
+Search empty state screen in the fintech app displays a search bar and recommended searches related to investments.
+Discovery tab in the fintech app shows the top daily stock movers and top financial news in a list of cards.
+A fee page in the fintech app displays the user's balance, options to add cash or cash out, investment options, and ways to add money to the app.
+Search Results Page in the music app displays search results, including artist results and a list of albums.
+Discovery Tab in the fintech app allows users to search for promotional gift cards, exclusive sale offers, and a list of friends they can pay money to.
+Search Filter Page in the travel app contains filters for price, bedroom and bathroom numbers, and amenities options.
+Review Page in the travel app allows users to search for reviews and view a list of reviews left by guests.
+A fintech app where I can send money to my list of contacts
+I'ld like an app where you can order a luxurious flying car, sponsored by fashion and champagne brands. Colors should be subtle and classy.
+a news feed for 3d printing including trending stories as well as older stories which the user may have missed. my brand color is #3747fd
+an app that has the same features as venmo but looks like home depot
+Voice Translation App
+A home page for a fitness app, featuring a list of fitness influencers, a carousel of popular workouts, and a section highlighting healthy diets recommended by fitness coaches with a primary button
+A home page for a fitness app, featuring a list of fitness influencers, a carousel of popular workouts, and a section highlighting healthy diets recommended by fitness coaches.

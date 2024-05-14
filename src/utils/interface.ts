@@ -106,3 +106,22 @@ export interface BuildBusinessQueryPayload {
   skip?: number;
   userId?: string;
 }
+
+export interface BuildCommunityOrderQueryPayload {
+  orderId?: string;
+  organizerId?: string;
+  productId?: string;
+  productName?: string;
+  status?: string;
+  minTargetQuantity?: number;
+  maxTargetQuantity?: number;
+  minPricePerUnit?: number;
+  maxPricePerUnit?: number;
+  startDate?: string;
+  endDate?: string;
+  sortField?: string;
+  sortOrder?: string;
+  limit?: number;
+  skip?: number;
+  userId?: string;
+}

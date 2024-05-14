@@ -278,7 +278,8 @@ const SubscriptionScreen = ({navigation}: NavigationProps) => {
         <BottomSheetCompParent
           title="Add Subscription"
           ref={openAddSubscriptionRef}
-          memoArray={['25%', '50%', '96']}>
+          memoArray={['25%', '50%', '96']}
+          >
           <SubscriptionFormMerchant
             closeSheet={() => openAddSubscriptionRef.current?.close()}
           />

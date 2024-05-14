@@ -29,6 +29,9 @@ export function getAuthCred() {
   };
 }
 
+// remove/ empty particular key
+
+
 export function clearAll() {
   storage.clearAll();
 }

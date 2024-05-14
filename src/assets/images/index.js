@@ -44,4 +44,7 @@ export default {
   enterotp: require('./EnterOTP.png'),
   orderplaced: require('./Orderplaced.png'),
   getstarted: require('./new/Getstarted.png'),
+  startupImage1: require('./new/StartupImage1.png'),
+  startupImage2: require('./new/StartupImage2.png'),
+  startupImage3: require('./new/StartupImage3.png'),
 };

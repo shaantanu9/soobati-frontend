@@ -7,17 +7,17 @@ import * as Progress from 'react-native-progress';
 import ImageAssets from '../../../assets/images/index';
 
 const images = [
-  ImageAssets.onBoardingImage1,
-  ImageAssets.onBoardingImage2,
-  ImageAssets.onBoardingImage3,
+  ImageAssets.startupImage1,
+  ImageAssets.startupImage2,
+  ImageAssets.startupImage3,
 ];
 
-const texts = ['Getting Started', 'Learn the Basics', 'Advanced Techniques'];
+const texts = ['Getting Started', 'Local to Vocal', 'Connect with People'];
 
 const descriptions = [
-  'Welcome to React Native Template',
-  'Explore React Native features',
-  'Master React Native development',
+  'Welcome to Soobati App',
+  'Explore Local Services and Products',
+  'Help each other grow together Real Social Media App',
 ];
 
 const GettingStarted: React.FC<NavigationProps> = ({navigation}) => {

@@ -58,6 +58,7 @@
     "react-native-image-picker": "^7.1.2",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-localization": "^2.3.2",
+    "react-native-maps": "^0.27.1",
     "react-native-mmkv": "^2.11.0",
     "react-native-permissions": "^4.1.5",
     "react-native-progress": "^5.0.1",

@@ -24,10 +24,12 @@ interface CartState {
   totalPrice: number;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  completeCart: any;
 }
 
 const initialState: CartState = {
   items: [],
+  completeCart: {},
   totalQuantity: 0,
   totalPrice: 0,
   status: 'idle',
@@ -50,6 +52,7 @@ export const cartSlice = createSlice({
         state.items = action.payload.items;
         state.totalQuantity = action.payload.totalQuantity;
         state.totalPrice = action.payload.totalPrice;
+        state.completeCart = action.payload;
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = 'failed';
